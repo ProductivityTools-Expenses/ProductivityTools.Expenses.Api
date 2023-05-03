@@ -16,10 +16,11 @@ namespace ProductivityTools.Expenses.Api.Controllers
 
         [HttpPost]
         [Route("GetTags")]
-        public List<Tag> GetTags(List<int> expensesId)
+        public IEnumerable<ExpenseTag> GetTags(List<int> expensesId)
         {
-            var tags = this.ExpensesContext.ExpenseTag.Include(x=>x.Tag).Where(x => expensesId.Contains(x.ExpenseId)).ToList(); ;
-            return new List<Tag>();
+            var expenseTags = this.ExpensesContext.ExpenseTag.Include(x=>x.Tag).Where(x => expensesId.Contains(x.ExpenseId)).ToList();
+           // var tags = expenseTags.Select(x => x.Tag);
+            return expenseTags;
         }
     }
 }
