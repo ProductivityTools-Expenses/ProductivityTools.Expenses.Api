@@ -14,10 +14,10 @@ namespace ProductivityTools.Expenses.Api.Controllers
         }
 
         [HttpGet]
-        [Route("echo")]
+        [Route("Echo")]
         public string Echo(string name)
         {
-            return string.Format($"Echo returned:{name} and date: {DateTime.Now}");
+            return $"Welcome request performed at {DateTime.Now} with param {name} on server {System.Environment.MachineName} to Application Transfers";
         }
     }
 }
