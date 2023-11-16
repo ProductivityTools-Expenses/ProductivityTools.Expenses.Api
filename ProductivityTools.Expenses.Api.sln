@@ -5,7 +5,9 @@ VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductivityTools.Expenses.Api", "ProductivityTools.Expenses.Api\ProductivityTools.Expenses.Api.csproj", "{6F1708BE-4F40-4CDF-83D7-B57E602B2204}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductivityTools.Expenses.DbUp", "ProductivityTools.Expenses.DbUp\ProductivityTools.Expenses.DbUp.csproj", "{9FD64F74-428F-4069-898E-22E17E7C04CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductivityTools.Expenses.DbUp", "ProductivityTools.Expenses.DbUp\ProductivityTools.Expenses.DbUp.csproj", "{9FD64F74-428F-4069-898E-22E17E7C04CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductivityTools.Expenses.Database", "ProductivityTools.Expenses.Db\ProductivityTools.Expenses.Database.csproj", "{DD31B51B-F66E-49C0-A3AB-3FC5DCD097C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{9FD64F74-428F-4069-898E-22E17E7C04CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9FD64F74-428F-4069-898E-22E17E7C04CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9FD64F74-428F-4069-898E-22E17E7C04CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD31B51B-F66E-49C0-A3AB-3FC5DCD097C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD31B51B-F66E-49C0-A3AB-3FC5DCD097C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD31B51B-F66E-49C0-A3AB-3FC5DCD097C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD31B51B-F66E-49C0-A3AB-3FC5DCD097C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

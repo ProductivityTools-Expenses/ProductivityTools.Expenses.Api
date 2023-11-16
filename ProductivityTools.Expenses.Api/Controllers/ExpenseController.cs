@@ -17,7 +17,7 @@ namespace ProductivityTools.Expenses.Api.Controllers
         [Route("Echo")]
         public string Echo(string name)
         {
-            return $"Welcome request performed at {DateTime.Now} with param {name} on server {System.Environment.MachineName} to Application Transfers";
+            return $"Welcome request performed at {DateTime.Now} with param {name} on server {System.Environment.MachineName} to Application Expenses";
         }
     }
 }
