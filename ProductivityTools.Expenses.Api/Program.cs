@@ -1,3 +1,5 @@
+using ProductivityTools.Expenses.Database;
+
 string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +15,7 @@ builder.Services.AddCors(options =>
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddDbContext<ExpensesContext>();
 
 var app = builder.Build();
 app.UseCors(MyAllowSpecificOrigins);

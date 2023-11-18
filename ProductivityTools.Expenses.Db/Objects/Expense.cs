@@ -9,7 +9,7 @@ namespace ProductivityTools.Expenses.Database.Objects
     public class Expense
     {
         public int ExpenseId { get; set; }
-        public string Name { get; set; }
-        public decimal Value { get; set; }
+        public string? Name { get; set; }
+        public decimal? Value { get; set; }
     }
 }

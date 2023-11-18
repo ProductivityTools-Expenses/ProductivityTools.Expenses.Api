@@ -6,4 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ProductivityTools.Expenses.Db\ProductivityTools.Expenses.Database.csproj" />
+  </ItemGroup>
+
 </Project>

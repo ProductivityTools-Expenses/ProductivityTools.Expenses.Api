@@ -12,7 +12,7 @@ namespace ProductivityTools.Expenses.Database
 
         public DbSet<Expense> Expenses { get; set; }
 
-        public TransfersContext(IConfiguration configuration)
+        public ExpensesContext(IConfiguration configuration)
         {
             this.configuration = configuration;
         }
@@ -31,7 +31,7 @@ namespace ProductivityTools.Expenses.Database
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(configuration.GetConnectionString("PTTransfers"));
+                optionsBuilder.UseSqlServer(configuration.GetConnectionString("PTExpenses"));
                 optionsBuilder.UseLoggerFactory(GetLoggerFactory());
                 optionsBuilder.EnableSensitiveDataLogging();
                 base.OnConfiguring(optionsBuilder);
@@ -40,7 +40,8 @@ namespace ProductivityTools.Expenses.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Expense>().ToTable("Expenses")
+            modelBuilder.HasDefaultSchema("me");
+            modelBuilder.Entity<Expense>().ToTable("Expense")
                 .HasKey(x => x.ExpenseId);
             //modelBuilder.Entity<Account>().HasMany(x => x.TransfersSource).WithOne(x => x.Source).HasForeignKey(x => x.SourceId).HasPrincipalKey(x => x.AccountId);
             //modelBuilder.Entity<Account>().HasMany(x => x.TransfersTarget).WithOne(x => x.Target).HasForeignKey(x => x.TargetId).HasPrincipalKey(x => x.AccountId);
