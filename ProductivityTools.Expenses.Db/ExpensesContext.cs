@@ -41,8 +41,10 @@ namespace ProductivityTools.Expenses.Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("me");
-            modelBuilder.Entity<Expense>().ToTable("Expense")
-                .HasKey(x => x.ExpenseId);
+            modelBuilder.Entity<Expense>().ToTable("Expense").HasKey(x => x.ExpenseId);
+            modelBuilder.Entity<Bag>().ToTable("Bag").HasKey(x => x.BagId);
+
+            modelBuilder.Entity<Bag>().HasMany(x => x.Expenses).WithOne(x => x.Bag).HasForeignKey(x => x.BagId).HasPrincipalKey(x => x.BagId);
             //modelBuilder.Entity<Account>().HasMany(x => x.TransfersSource).WithOne(x => x.Source).HasForeignKey(x => x.SourceId).HasPrincipalKey(x => x.AccountId);
             //modelBuilder.Entity<Account>().HasMany(x => x.TransfersTarget).WithOne(x => x.Target).HasForeignKey(x => x.TargetId).HasPrincipalKey(x => x.AccountId);
           

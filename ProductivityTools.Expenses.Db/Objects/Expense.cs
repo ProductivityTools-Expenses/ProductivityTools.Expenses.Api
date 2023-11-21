@@ -11,5 +11,8 @@ namespace ProductivityTools.Expenses.Database.Objects
         public int ExpenseId { get; set; }
         public string? Name { get; set; }
         public decimal? Value { get; set; }
+
+        public int BagId { get; set; }  
+        public Bag Bag { get; set; }    
     }
 }
