@@ -11,6 +11,7 @@ namespace ProductivityTools.Expenses.Database
         private readonly IConfiguration configuration;
 
         public DbSet<Expense> Expenses { get; set; }
+        public DbSet<Bag> Bag { get; set; }
 
         public ExpensesContext(IConfiguration configuration)
         {
