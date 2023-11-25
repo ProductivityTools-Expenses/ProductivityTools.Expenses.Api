@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ProductivityTools.Expenses.Api.Requests;
 using ProductivityTools.Expenses.Database;
 using ProductivityTools.Expenses.Database.Objects;
 
@@ -25,14 +26,19 @@ namespace ProductivityTools.Expenses.Api.Controllers
             return $"Welcome request performed at {DateTime.Now} with param {name} on server {System.Environment.MachineName} to Application Expenses";
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("List")]
-        public List<Expense> List()
+        public List<Expense> List(ListRequest listRequest)
         {
+
             var r = ExpensesContext.Expenses
-                .Include(x=>x.Bag)
-                .ToList();
-            return r;
+                .Include(x => x.Bag);
+            if (listRequest.BagId.HasValue)
+            {
+                r = r.Where(x => x.BagId == listRequest.BagId.Value).Include(x => x.Bag);
+            }
+            var result = r.ToList();
+            return result;
         }
 
         [HttpGet]
