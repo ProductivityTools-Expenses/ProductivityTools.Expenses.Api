@@ -6,7 +6,7 @@ using ProductivityTools.Expenses.Database.Objects;
 
 namespace ProductivityTools.Expenses.Database
 {
-    public class ExpensesContext: DbContext
+    public class ExpensesContext : DbContext
     {
         private readonly IConfiguration configuration;
 
@@ -46,9 +46,12 @@ namespace ProductivityTools.Expenses.Database
             modelBuilder.Entity<Bag>().ToTable("Bag").HasKey(x => x.BagId);
 
             modelBuilder.Entity<Bag>().HasMany(x => x.Expenses).WithOne(x => x.Bag).HasForeignKey(x => x.BagId).HasPrincipalKey(x => x.BagId);
+
+            modelBuilder.Entity<Category>().HasMany(x => x.Expenses).WithOne(x => x.Category).HasForeignKey(x => x.CategoryId).HasPrincipalKey(x => x.CategoryId);
+
             //modelBuilder.Entity<Account>().HasMany(x => x.TransfersSource).WithOne(x => x.Source).HasForeignKey(x => x.SourceId).HasPrincipalKey(x => x.AccountId);
             //modelBuilder.Entity<Account>().HasMany(x => x.TransfersTarget).WithOne(x => x.Target).HasForeignKey(x => x.TargetId).HasPrincipalKey(x => x.AccountId);
-          
+
             //modelBuilder.Entity<TransferHistory>().ToTable("TransferHistory")
             //    .HasKey(x => x.TransferHistoryId);
             //modelBuilder.Entity<Account>().ToTable("Account")

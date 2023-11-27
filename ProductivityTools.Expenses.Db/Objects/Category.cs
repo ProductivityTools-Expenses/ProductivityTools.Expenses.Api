@@ -7,15 +7,14 @@ using System.Threading.Tasks;
 
 namespace ProductivityTools.Expenses.Database.Objects
 {
-    public class Bag
+    public class Category
     {
-        public int BagId { get; set; }
+        public int CategoryId { get; set; }
         public string Name { get; set; }
-        public string? Description { get; set; }
 
         [JsonIgnore]
         public ICollection<Expense>? Expenses { get; set; }
-        //[JsonIgnore]
-       // public List<BagCategory> BagCategories { get; set; } = new();
+
+       // public List<BagCategory> BagCategory { get; set; } = new();
     }
 }

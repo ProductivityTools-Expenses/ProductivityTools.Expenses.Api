@@ -32,10 +32,10 @@ namespace ProductivityTools.Expenses.Api.Controllers
         {
 
             var r = ExpensesContext.Expenses
-                .Include(x => x.Bag);
+                .Include(x => x.Bag).Include(x => x.Category);
             if (listRequest.BagId.HasValue)
             {
-                r = r.Where(x => x.BagId == listRequest.BagId.Value).Include(x => x.Bag);
+                r = r.Where(x => x.BagId == listRequest.BagId.Value).Include(x => x.Bag).Include(x => x.Category);
             }
             var result = r.ToList();
             return result;
