@@ -48,5 +48,13 @@ namespace ProductivityTools.Expenses.Api.Controllers
             var r = ExpensesContext.Bag.ToList();
             return r;
         }
+
+        [HttpGet]
+        [Route("CagetoryList")]
+        public List<Category> CategoryList()
+        {
+            var r = ExpensesContext.Categories.ToList();
+            return r;
+        }
     }
 }

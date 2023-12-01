@@ -13,6 +13,7 @@ namespace ProductivityTools.Expenses.Database
         public DbSet<Expense> Expenses { get; set; }
         public DbSet<Bag> Bag { get; set; }
 
+        public DbSet<Category> Categories { get; set; }
         public ExpensesContext(IConfiguration configuration)
         {
             this.configuration = configuration;
@@ -44,6 +45,7 @@ namespace ProductivityTools.Expenses.Database
             modelBuilder.HasDefaultSchema("me");
             modelBuilder.Entity<Expense>().ToTable("Expense").HasKey(x => x.ExpenseId);
             modelBuilder.Entity<Bag>().ToTable("Bag").HasKey(x => x.BagId);
+            modelBuilder.Entity<Category>().ToTable("Category").HasKey(x => x.CategoryId);
 
             modelBuilder.Entity<Bag>().HasMany(x => x.Expenses).WithOne(x => x.Bag).HasForeignKey(x => x.BagId).HasPrincipalKey(x => x.BagId);
 
