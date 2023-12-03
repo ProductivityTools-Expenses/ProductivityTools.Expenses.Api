@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProductivityTools.Expenses.Api.Requests;
@@ -28,6 +29,7 @@ namespace ProductivityTools.Expenses.Api.Controllers
 
         [HttpPost]
         [Route("List")]
+        [Authorize]
         public List<Expense> List(ListRequest listRequest)
         {
 
