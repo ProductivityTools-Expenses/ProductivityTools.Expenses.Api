@@ -32,14 +32,15 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<ExpensesContext>();
 
 var app = builder.Build();
+app.UseRouting();
 app.UseCors(MyAllowSpecificOrigins);
 
-// Configure the HTTP request pipeline.
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
-app.UseAuthentication();
+
 
 app.MapControllers();
 
