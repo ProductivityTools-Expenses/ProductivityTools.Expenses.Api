@@ -34,13 +34,13 @@ pipeline {
         }
         stage('copyDbMigratdorFiles') {
             steps {
-                bat('xcopy "ProductivityTools.Expenses.Api.DbUp\\bin\\Release\\net6.0\\publish" "C:\\Bin\\DbMigration\\ExpensesApiDdbMigration" /O /X /E /H /K')
+                bat('xcopy "ProductivityTools.Expenses.DbUp\\bin\\Release\\net6.0\\publish" "C:\\Bin\\DbMigration\\ExpensesApiDdbMigration" /O /X /E /H /K')
             }
         }
 
         stage('runDbMigratorFiles') {
             steps {
-                bat('C:\\Bin\\DbMigration\\ExpensesApiDdbMigration\\ProductivityTools.Expenses.Api.DbUp.exe')
+                bat('C:\\Bin\\DbMigration\\ExpensesApiDdbMigration\\ProductivityTools.Expenses.DbUp.exe')
             }
         }
 
