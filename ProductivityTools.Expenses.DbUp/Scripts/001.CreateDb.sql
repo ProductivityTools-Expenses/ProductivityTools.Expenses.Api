@@ -1,22 +1,7 @@
-﻿/****** Object:  Schema [ccw]    Script Date: 07.12.2023 19:44:19 ******/
-CREATE SCHEMA [ccw]
-GO
-/****** Object:  Schema [gl]    Script Date: 07.12.2023 19:44:19 ******/
-CREATE SCHEMA [gl]
-GO
-/****** Object:  Schema [kameralne7]    Script Date: 07.12.2023 19:44:19 ******/
-CREATE SCHEMA [kameralne7]
-GO
-/****** Object:  Schema [me]    Script Date: 07.12.2023 19:44:19 ******/
+﻿/****** Object:  Schema [me]    Script Date: 07.12.2023 19:44:19 ******/
 CREATE SCHEMA [me]
 GO
 
-
-/****** Object:  Table [me].[Bag]    Script Date: 07.12.2023 19:44:19 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
 CREATE TABLE [me].[Bag](
 	[BagID] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [varchar](20) NULL,
@@ -27,11 +12,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [me].[Category]    Script Date: 07.12.2023 19:44:19 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE TABLE [me].[Category](
 	[CategoryID] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [varchar](20) NULL,
@@ -41,11 +22,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [me].[Expense]    Script Date: 07.12.2023 19:44:19 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE TABLE [me].[Expense](
 	[ExpenseID] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [nvarchar](200) NULL,
@@ -67,23 +44,8 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  View [me].[Raport]    Script Date: 07.12.2023 19:44:19 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-    CREATE VIEW  [me].[Raport] as
-  SELECT B.BagID,B.[Name] as 'BagName',B.[Description],c.[Name] AS 'CategoryName',E.ExpenseID, E.[Name] as 'ExpenceName',E.[Date],E.ExpectedValue,E.[Value],E.Discount, E.ValueAfterDiscount,
-  E.Free, E.Comment
-  FROM [me].[Bag] b
-  inner join me.Expense e ON b.BagID=e.BagID
-  inner join me.Category c ON c.CategoryId = e.CategoryId
-GO
-/****** Object:  Table [me].[TagGroup]    Script Date: 07.12.2023 19:44:19 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
+ 
 CREATE TABLE [me].[TagGroup](
 	[TagGroupID] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [varchar](30) NULL,
@@ -93,11 +55,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [me].[Tag]    Script Date: 07.12.2023 19:44:19 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE TABLE [me].[Tag](
 	[TagID] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [varchar](30) NULL,
@@ -109,107 +67,14 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [me].[ExpenseTag]    Script Date: 07.12.2023 19:44:19 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE TABLE [me].[ExpenseTag](
 	[ExpenseTagID] [int] IDENTITY(1,1) NOT NULL,
 	[ExpenseID] [int] NULL,
 	[TagID] [int] NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  View [me].[TagExpense]    Script Date: 07.12.2023 19:44:19 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE VIEW [me].[TagExpense] AS
-  select r.BagName,r.CategoryName, r.ExpenseID,r.ExpenceName,tg.Name as 'TagGroup',t.Name as 'Tag',r.ExpectedValue, r.[Value]
-  from me.Raport r
-  left join me.ExpenseTag et ON r.ExpenseId=et.ExpenseId
-  left join me.Tag t ON t.TagID=et.TagId
-  left join me.TagGroup tg ON tg.TagGroupId=t.TagGroupId
-  
-Go
-  
- CREATE VIEW [me].[Summary] as
-with categories as
-(
-	select CategoryName,Free,SUM([value]) as 'CumulativeValue'
-	FROM [me].[Raport]
-	where BagName='MagdaSetup'
-	group by CategoryName,Free 
-)
-select CategoryName, TotalSales = SUM(CumulativeValue )
-from categories
-group by  Rollup(CategoryName)
-GO
-/****** Object:  View [me].[ExpencesByMonth]    Script Date: 07.12.2023 19:44:19 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
 
-
-CREATE VIEW [me].[ExpencesByMonth] as
-SELECT BagName, Year(Date) as 'Year', MONTH(Date) as 'Month',
-      SUM([Value]) as MonthCost
-  FROM [me].[Raport]
-  --where BagName='MagdaSetup'
-  group by BagName, Year(Date), MONTH(Date)
-GO
-/****** Object:  View [me].[Peugeot]    Script Date: 07.12.2023 19:44:19 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE VIEW [me].[Peugeot] AS
-SELECT 
-      [Description]
-      
-      ,[Value]
-     
-  FROM [me].[Raport] where BagName='Peugeot308'
-GO
-/****** Object:  View [me].[rollupCost]    Script Date: 07.12.2023 19:44:19 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
-
-CREATE VIEW [me].[rollupCost] as
-SELECT [BagName]
-      ,[CategoryName]
-      ,[ExpenceName]
-       ,Sum([Value]) as aggr
-  FROM [me].[Raport]
- group by rollup ([BagName],[Description],CategoryName,ExpenceName)
-GO
-/****** Object:  View [me].[rollupSpent]    Script Date: 07.12.2023 19:44:19 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
-
-CREATE VIEW [me].[rollupSpent] as
-SELECT [BagName]
-      ,[CategoryName]
-      ,[ExpenceName]
-       ,Sum([Value]) as aggr
-  FROM [me].[Raport]
-  where free<>1
- group by rollup ([BagName],[Description],CategoryName,ExpenceName)
- 
-GO
-/****** Object:  Table [me].[BagCategory]    Script Date: 07.12.2023 19:44:19 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
 CREATE TABLE [me].[BagCategory](
 	[BagCategoryID] [int] IDENTITY(1,1) NOT NULL,
 	[BagId] [int] NULL,
@@ -225,11 +90,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [me].[BagCurrency]    Script Date: 07.12.2023 19:44:19 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE TABLE [me].[BagCurrency](
 	[BagCurrencyID] [int] IDENTITY(1,1) NOT NULL,
 	[CurrencyID] [int] NULL,
