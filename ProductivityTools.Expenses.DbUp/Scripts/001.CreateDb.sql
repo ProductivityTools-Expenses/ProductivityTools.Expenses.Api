@@ -194,8 +194,6 @@ GO
 ALTER TABLE [me].[BagCurrency]  WITH CHECK ADD  CONSTRAINT [FK_CategoryCurenncy_Category] FOREIGN KEY([BagID])
 REFERENCES [me].[Bag] ([BagID])
 GO
-
-
 ALTER TABLE [me].[BagCurrency] CHECK CONSTRAINT [FK_CategoryCurenncy_Category]
 GO
 ALTER TABLE [me].[BagCurrency]  WITH CHECK ADD  CONSTRAINT [FK_CategoryCurenncy_Currency] FOREIGN KEY([CurrencyID])
@@ -216,69 +214,66 @@ GO
 ALTER TABLE [me].[Expense]  WITH CHECK ADD  CONSTRAINT [FK_Expense_Category] FOREIGN KEY([CategoryID])
 REFERENCES [me].[Category] ([CategoryID])
 GO
---ALTER TABLE [me].[Expense] CHECK CONSTRAINT [FK_Expense_Category]
---GO
---ALTER TABLE [me].[Expense]  WITH CHECK ADD  CONSTRAINT [FK_Expense_Currency] FOREIGN KEY([CurrencyID])
---REFERENCES [me].[Currency] ([CurrencyID])
---GO
---ALTER TABLE [me].[Expense] CHECK CONSTRAINT [FK_Expense_Currency]
---GO
---ALTER TABLE [me].[ExpenseTag]  WITH CHECK ADD  CONSTRAINT [FK_ExpenseTag_Expense] FOREIGN KEY([ExpenseID])
---REFERENCES [me].[Expense] ([ExpenseID])
---GO
---ALTER TABLE [me].[ExpenseTag] CHECK CONSTRAINT [FK_ExpenseTag_Expense]
---GO
---ALTER TABLE [me].[ExpenseTag]  WITH CHECK ADD  CONSTRAINT [FK_ExpenseTag_Tag] FOREIGN KEY([TagID])
---REFERENCES [me].[Tag] ([TagID])
---GO
---ALTER TABLE [me].[ExpenseTag] CHECK CONSTRAINT [FK_ExpenseTag_Tag]
---GO
---ALTER TABLE [me].[Income]  WITH CHECK ADD  CONSTRAINT [FK_Income_Bag] FOREIGN KEY([BagID])
---REFERENCES [me].[Bag] ([BagID])
---GO
---ALTER TABLE [me].[Income] CHECK CONSTRAINT [FK_Income_Bag]
---GO
---ALTER TABLE [me].[Income]  WITH CHECK ADD  CONSTRAINT [FK_Income_Category] FOREIGN KEY([CategoryID])
---REFERENCES [me].[Category] ([CategoryID])
---GO
---ALTER TABLE [me].[Income] CHECK CONSTRAINT [FK_Income_Category]
---GO
---ALTER TABLE [me].[Income]  WITH CHECK ADD  CONSTRAINT [FK_Income_Currency] FOREIGN KEY([CurrencyID])
---REFERENCES [me].[Currency] ([CurrencyID])
---GO
---ALTER TABLE [me].[Income] CHECK CONSTRAINT [FK_Income_Currency]
---GO
---ALTER TABLE [me].[Income]  WITH CHECK ADD  CONSTRAINT [FK_Income_IncomeSource] FOREIGN KEY([IncomeSourceId])
---REFERENCES [me].[IncomeSource] ([IncomeSourceId])
---GO
---ALTER TABLE [me].[Income] CHECK CONSTRAINT [FK_Income_IncomeSource]
---GO
---ALTER TABLE [me].[Tag]  WITH CHECK ADD  CONSTRAINT [FK_Tag_TagGroup] FOREIGN KEY([TagGroupID])
---REFERENCES [me].[TagGroup] ([TagGroupID])
---GO
---ALTER TABLE [me].[Tag] CHECK CONSTRAINT [FK_Tag_TagGroup]
---GO
---ALTER TABLE [me].[TagGroupCategory]  WITH CHECK ADD  CONSTRAINT [FK_CategoryTagGroup_Category] FOREIGN KEY([CategoryID])
---REFERENCES [me].[Category] ([CategoryID])
---GO
---ALTER TABLE [me].[TagGroupCategory] CHECK CONSTRAINT [FK_CategoryTagGroup_Category]
---GO
---ALTER TABLE [me].[TagGroupCategory]  WITH CHECK ADD  CONSTRAINT [FK_CategoryTagGroup_TagGroup] FOREIGN KEY([TagGroupID])
---REFERENCES [me].[TagGroup] ([TagGroupID])
---GO
---ALTER TABLE [me].[TagGroupCategory] CHECK CONSTRAINT [FK_CategoryTagGroup_TagGroup]
---GO
---ALTER TABLE [me].[TagTagGroup]  WITH CHECK ADD  CONSTRAINT [FK_TagTagGroup_Tag] FOREIGN KEY([TagID])
---REFERENCES [me].[Tag] ([TagID])
---GO
---ALTER TABLE [me].[TagTagGroup] CHECK CONSTRAINT [FK_TagTagGroup_Tag]
---GO
---ALTER TABLE [me].[TagTagGroup]  WITH CHECK ADD  CONSTRAINT [FK_TagTagGroup_TagGroup] FOREIGN KEY([TagGroupID])
---REFERENCES [me].[TagGroup] ([TagGroupID])
---GO
---ALTER TABLE [me].[TagTagGroup] CHECK CONSTRAINT [FK_TagTagGroup_TagGroup]
---GO
---USE [master]
---GO
---ALTER DATABASE [PTExpenses] SET  READ_WRITE 
---GO
+
+
+ALTER TABLE [me].[Expense] CHECK CONSTRAINT [FK_Expense_Category]
+GO
+ALTER TABLE [me].[Expense]  WITH CHECK ADD  CONSTRAINT [FK_Expense_Currency] FOREIGN KEY([CurrencyID])
+REFERENCES [me].[Currency] ([CurrencyID])
+GO
+ALTER TABLE [me].[Expense] CHECK CONSTRAINT [FK_Expense_Currency]
+GO
+ALTER TABLE [me].[ExpenseTag]  WITH CHECK ADD  CONSTRAINT [FK_ExpenseTag_Expense] FOREIGN KEY([ExpenseID])
+REFERENCES [me].[Expense] ([ExpenseID])
+GO
+ALTER TABLE [me].[ExpenseTag] CHECK CONSTRAINT [FK_ExpenseTag_Expense]
+GO
+ALTER TABLE [me].[ExpenseTag]  WITH CHECK ADD  CONSTRAINT [FK_ExpenseTag_Tag] FOREIGN KEY([TagID])
+REFERENCES [me].[Tag] ([TagID])
+GO
+ALTER TABLE [me].[ExpenseTag] CHECK CONSTRAINT [FK_ExpenseTag_Tag]
+GO
+ALTER TABLE [me].[Income]  WITH CHECK ADD  CONSTRAINT [FK_Income_Bag] FOREIGN KEY([BagID])
+REFERENCES [me].[Bag] ([BagID])
+GO
+ALTER TABLE [me].[Income] CHECK CONSTRAINT [FK_Income_Bag]
+GO
+ALTER TABLE [me].[Income]  WITH CHECK ADD  CONSTRAINT [FK_Income_Category] FOREIGN KEY([CategoryID])
+REFERENCES [me].[Category] ([CategoryID])
+GO
+ALTER TABLE [me].[Income] CHECK CONSTRAINT [FK_Income_Category]
+GO
+ALTER TABLE [me].[Income]  WITH CHECK ADD  CONSTRAINT [FK_Income_Currency] FOREIGN KEY([CurrencyID])
+REFERENCES [me].[Currency] ([CurrencyID])
+GO
+ALTER TABLE [me].[Income] CHECK CONSTRAINT [FK_Income_Currency]
+GO
+ALTER TABLE [me].[Income]  WITH CHECK ADD  CONSTRAINT [FK_Income_IncomeSource] FOREIGN KEY([IncomeSourceId])
+REFERENCES [me].[IncomeSource] ([IncomeSourceId])
+GO
+ALTER TABLE [me].[Income] CHECK CONSTRAINT [FK_Income_IncomeSource]
+GO
+ALTER TABLE [me].[Tag]  WITH CHECK ADD  CONSTRAINT [FK_Tag_TagGroup] FOREIGN KEY([TagGroupID])
+REFERENCES [me].[TagGroup] ([TagGroupID])
+GO
+ALTER TABLE [me].[Tag] CHECK CONSTRAINT [FK_Tag_TagGroup]
+GO
+ALTER TABLE [me].[TagGroupCategory]  WITH CHECK ADD  CONSTRAINT [FK_CategoryTagGroup_Category] FOREIGN KEY([CategoryID])
+REFERENCES [me].[Category] ([CategoryID])
+GO
+ALTER TABLE [me].[TagGroupCategory] CHECK CONSTRAINT [FK_CategoryTagGroup_Category]
+GO
+ALTER TABLE [me].[TagGroupCategory]  WITH CHECK ADD  CONSTRAINT [FK_CategoryTagGroup_TagGroup] FOREIGN KEY([TagGroupID])
+REFERENCES [me].[TagGroup] ([TagGroupID])
+GO
+ALTER TABLE [me].[TagGroupCategory] CHECK CONSTRAINT [FK_CategoryTagGroup_TagGroup]
+GO
+ALTER TABLE [me].[TagTagGroup]  WITH CHECK ADD  CONSTRAINT [FK_TagTagGroup_Tag] FOREIGN KEY([TagID])
+REFERENCES [me].[Tag] ([TagID])
+GO
+ALTER TABLE [me].[TagTagGroup] CHECK CONSTRAINT [FK_TagTagGroup_Tag]
+GO
+ALTER TABLE [me].[TagTagGroup]  WITH CHECK ADD  CONSTRAINT [FK_TagTagGroup_TagGroup] FOREIGN KEY([TagGroupID])
+REFERENCES [me].[TagGroup] ([TagGroupID])
+GO
+ALTER TABLE [me].[TagTagGroup] CHECK CONSTRAINT [FK_TagTagGroup_TagGroup]
