@@ -205,23 +205,6 @@ SELECT [BagName]
  group by rollup ([BagName],[Description],CategoryName,ExpenceName)
  
 GO
-/****** Object:  View [misc].[GiftSummary]    Script Date: 07.12.2023 19:44:19 ******/
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE VIEW [TEMP].[Kameralne7] as
-SELECT [BagName]
-      ,[CategoryName]
-      ,[ExpenseID]
-      ,[ExpenceName]
-      ,[TagGroup]
-      ,[Tag]
-      ,[ExpectedValue]
-      ,[Value]
-  FROM [me].[TagExpense] where BagName='kameralne7' and CategoryName='InitialRemont'
-GO
 /****** Object:  Table [me].[BagCategory]    Script Date: 07.12.2023 19:44:19 ******/
 SET ANSI_NULLS ON
 GO
