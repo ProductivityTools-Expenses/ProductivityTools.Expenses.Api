@@ -132,7 +132,7 @@ CREATE VIEW [me].[TagExpense] AS
   left join me.Tag t ON t.TagID=et.TagId
   left join me.TagGroup tg ON tg.TagGroupId=t.TagGroupId
   
-
+Go
 
 CREATE VIEW [kameralne7].[BaseRaport] AS
 select r.BagName,r.CategoryName, r.ExpenseID,r.ExpenceName,r.ExpectedValue, r.[Value],r.Discount, r.ValueAfterDiscount,r.Free, r.Date
