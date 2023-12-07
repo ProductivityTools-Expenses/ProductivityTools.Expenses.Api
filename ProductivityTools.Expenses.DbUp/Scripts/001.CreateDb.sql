@@ -171,7 +171,7 @@ SELECT
       
       ,[Value]
      
-  FROM [PawelDT].[me].[Raport] where BagName='Peugeot308'
+  FROM [me].[Raport] where BagName='Peugeot308'
 GO
 /****** Object:  View [me].[rollupCost]    Script Date: 07.12.2023 19:44:19 ******/
 SET ANSI_NULLS ON
@@ -185,7 +185,7 @@ SELECT [BagName]
       ,[CategoryName]
       ,[ExpenceName]
        ,Sum([Value]) as aggr
-  FROM [PawelDT].[me].[Raport]
+  FROM [me].[Raport]
  group by rollup ([BagName],[Description],CategoryName,ExpenceName)
 GO
 /****** Object:  View [me].[rollupSpent]    Script Date: 07.12.2023 19:44:19 ******/
@@ -200,7 +200,7 @@ SELECT [BagName]
       ,[CategoryName]
       ,[ExpenceName]
        ,Sum([Value]) as aggr
-  FROM [PawelDT].[me].[Raport]
+  FROM [me].[Raport]
   where free<>1
  group by rollup ([BagName],[Description],CategoryName,ExpenceName)
  
@@ -229,7 +229,7 @@ SELECT [BagName]
       ,[Tag]
       ,[ExpectedValue]
       ,[Value]
-  FROM [PawelDT].[me].[TagExpense] where BagName='kameralne7' and CategoryName='InitialRemont'
+  FROM [me].[TagExpense] where BagName='kameralne7' and CategoryName='InitialRemont'
 GO
 /****** Object:  Table [me].[BagCategory]    Script Date: 07.12.2023 19:44:19 ******/
 SET ANSI_NULLS ON
