@@ -164,36 +164,36 @@ CREATE TABLE [me].[TagGroupCategory](
 	[CategoryID] [int] NULL
 ) ON [PRIMARY]
 GO
---/****** Object:  Table [me].[TagTagGroup]    Script Date: 07.12.2023 19:44:19 ******/
---SET ANSI_NULLS ON
---GO
---SET QUOTED_IDENTIFIER ON
---GO
---CREATE TABLE [me].[TagTagGroup](
---	[TagTagGroupID] [int] IDENTITY(1,1) NOT NULL,
---	[TagID] [int] NULL,
---	[TagGroupID] [int] NULL
---) ON [PRIMARY]
---GO
---ALTER TABLE [me].[Expense] ADD  CONSTRAINT [def_false]  DEFAULT ((0)) FOR [Free]
---GO
---ALTER TABLE [me].[Expense] ADD  DEFAULT ((0)) FOR [Discount]
---GO
---ALTER TABLE [me].[Income] ADD  CONSTRAINT [incomeClearedFalse]  DEFAULT ((0)) FOR [Cleared]
---GO
---ALTER TABLE [me].[BagCategory]  WITH CHECK ADD  CONSTRAINT [FK_BagCategory_Bag] FOREIGN KEY([BagId])
---REFERENCES [me].[Bag] ([BagID])
---GO
---ALTER TABLE [me].[BagCategory] CHECK CONSTRAINT [FK_BagCategory_Bag]
---GO
---ALTER TABLE [me].[BagCategory]  WITH CHECK ADD  CONSTRAINT [FK_BagCategory_Category] FOREIGN KEY([CategoryId])
---REFERENCES [me].[Category] ([CategoryID])
---GO
---ALTER TABLE [me].[BagCategory] CHECK CONSTRAINT [FK_BagCategory_Category]
---GO
---ALTER TABLE [me].[BagCurrency]  WITH CHECK ADD  CONSTRAINT [FK_CategoryCurenncy_Category] FOREIGN KEY([BagID])
---REFERENCES [me].[Bag] ([BagID])
---GO
+/****** Object:  Table [me].[TagTagGroup]    Script Date: 07.12.2023 19:44:19 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [me].[TagTagGroup](
+	[TagTagGroupID] [int] IDENTITY(1,1) NOT NULL,
+	[TagID] [int] NULL,
+	[TagGroupID] [int] NULL
+) ON [PRIMARY]
+GO
+ALTER TABLE [me].[Expense] ADD  CONSTRAINT [def_false]  DEFAULT ((0)) FOR [Free]
+GO
+ALTER TABLE [me].[Expense] ADD  DEFAULT ((0)) FOR [Discount]
+GO
+ALTER TABLE [me].[Income] ADD  CONSTRAINT [incomeClearedFalse]  DEFAULT ((0)) FOR [Cleared]
+GO
+ALTER TABLE [me].[BagCategory]  WITH CHECK ADD  CONSTRAINT [FK_BagCategory_Bag] FOREIGN KEY([BagId])
+REFERENCES [me].[Bag] ([BagID])
+GO
+ALTER TABLE [me].[BagCategory] CHECK CONSTRAINT [FK_BagCategory_Bag]
+GO
+ALTER TABLE [me].[BagCategory]  WITH CHECK ADD  CONSTRAINT [FK_BagCategory_Category] FOREIGN KEY([CategoryId])
+REFERENCES [me].[Category] ([CategoryID])
+GO
+ALTER TABLE [me].[BagCategory] CHECK CONSTRAINT [FK_BagCategory_Category]
+GO
+ALTER TABLE [me].[BagCurrency]  WITH CHECK ADD  CONSTRAINT [FK_CategoryCurenncy_Category] FOREIGN KEY([BagID])
+REFERENCES [me].[Bag] ([BagID])
+GO
 --ALTER TABLE [me].[BagCurrency] CHECK CONSTRAINT [FK_CategoryCurenncy_Category]
 --GO
 --ALTER TABLE [me].[BagCurrency]  WITH CHECK ADD  CONSTRAINT [FK_CategoryCurenncy_Currency] FOREIGN KEY([CurrencyID])
