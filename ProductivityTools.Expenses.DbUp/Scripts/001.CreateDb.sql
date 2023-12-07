@@ -194,26 +194,28 @@ GO
 ALTER TABLE [me].[BagCurrency]  WITH CHECK ADD  CONSTRAINT [FK_CategoryCurenncy_Category] FOREIGN KEY([BagID])
 REFERENCES [me].[Bag] ([BagID])
 GO
---ALTER TABLE [me].[BagCurrency] CHECK CONSTRAINT [FK_CategoryCurenncy_Category]
---GO
---ALTER TABLE [me].[BagCurrency]  WITH CHECK ADD  CONSTRAINT [FK_CategoryCurenncy_Currency] FOREIGN KEY([CurrencyID])
---REFERENCES [me].[Currency] ([CurrencyID])
---GO
---ALTER TABLE [me].[BagCurrency] CHECK CONSTRAINT [FK_CategoryCurenncy_Currency]
---GO
---ALTER TABLE [me].[Expense]  WITH CHECK ADD  CONSTRAINT [FK_Expence_Income] FOREIGN KEY([IncomeId])
---REFERENCES [me].[Income] ([IncomeID])
---GO
---ALTER TABLE [me].[Expense] CHECK CONSTRAINT [FK_Expence_Income]
---GO
---ALTER TABLE [me].[Expense]  WITH CHECK ADD  CONSTRAINT [FK_Expense_Bag] FOREIGN KEY([BagID])
---REFERENCES [me].[Bag] ([BagID])
---GO
---ALTER TABLE [me].[Expense] CHECK CONSTRAINT [FK_Expense_Bag]
---GO
---ALTER TABLE [me].[Expense]  WITH CHECK ADD  CONSTRAINT [FK_Expense_Category] FOREIGN KEY([CategoryID])
---REFERENCES [me].[Category] ([CategoryID])
---GO
+
+
+ALTER TABLE [me].[BagCurrency] CHECK CONSTRAINT [FK_CategoryCurenncy_Category]
+GO
+ALTER TABLE [me].[BagCurrency]  WITH CHECK ADD  CONSTRAINT [FK_CategoryCurenncy_Currency] FOREIGN KEY([CurrencyID])
+REFERENCES [me].[Currency] ([CurrencyID])
+GO
+ALTER TABLE [me].[BagCurrency] CHECK CONSTRAINT [FK_CategoryCurenncy_Currency]
+GO
+ALTER TABLE [me].[Expense]  WITH CHECK ADD  CONSTRAINT [FK_Expence_Income] FOREIGN KEY([IncomeId])
+REFERENCES [me].[Income] ([IncomeID])
+GO
+ALTER TABLE [me].[Expense] CHECK CONSTRAINT [FK_Expence_Income]
+GO
+ALTER TABLE [me].[Expense]  WITH CHECK ADD  CONSTRAINT [FK_Expense_Bag] FOREIGN KEY([BagID])
+REFERENCES [me].[Bag] ([BagID])
+GO
+ALTER TABLE [me].[Expense] CHECK CONSTRAINT [FK_Expense_Bag]
+GO
+ALTER TABLE [me].[Expense]  WITH CHECK ADD  CONSTRAINT [FK_Expense_Category] FOREIGN KEY([CategoryID])
+REFERENCES [me].[Category] ([CategoryID])
+GO
 --ALTER TABLE [me].[Expense] CHECK CONSTRAINT [FK_Expense_Category]
 --GO
 --ALTER TABLE [me].[Expense]  WITH CHECK ADD  CONSTRAINT [FK_Expense_Currency] FOREIGN KEY([CurrencyID])
