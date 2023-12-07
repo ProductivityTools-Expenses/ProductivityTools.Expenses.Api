@@ -102,68 +102,68 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
---/****** Object:  Table [me].[Currency]    Script Date: 07.12.2023 19:44:19 ******/
---SET ANSI_NULLS ON
---GO
---SET QUOTED_IDENTIFIER ON
---GO
---CREATE TABLE [me].[Currency](
---	[CurrencyID] [int] IDENTITY(1,1) NOT NULL,
---	[Name] [varchar](20) NULL,
---PRIMARY KEY CLUSTERED 
---(
---	[CurrencyID] ASC
---)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
---) ON [PRIMARY]
---GO
---/****** Object:  Table [me].[Income]    Script Date: 07.12.2023 19:44:19 ******/
---SET ANSI_NULLS ON
---GO
---SET QUOTED_IDENTIFIER ON
---GO
---CREATE TABLE [me].[Income](
---	[IncomeID] [int] IDENTITY(1,1) NOT NULL,
---	[Name] [varchar](200) NULL,
---	[CategoryID] [int] NULL,
---	[BagID] [int] NULL,
---	[Date] [datetime] NULL,
---	[TimeStamp] [timestamp] NOT NULL,
---	[CurrencyID] [int] NULL,
---	[Value] [decimal](6, 2) NULL,
---	[Cleared] [bit] NOT NULL,
---	[Comment] [varchar](2000) NULL,
---	[IncomeSourceId] [int] NULL,
---PRIMARY KEY CLUSTERED 
---(
---	[IncomeID] ASC
---)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
---) ON [PRIMARY]
---GO
---/****** Object:  Table [me].[IncomeSource]    Script Date: 07.12.2023 19:44:19 ******/
---SET ANSI_NULLS ON
---GO
---SET QUOTED_IDENTIFIER ON
---GO
---CREATE TABLE [me].[IncomeSource](
---	[IncomeSourceId] [int] IDENTITY(1,1) NOT NULL,
---	[Name] [varchar](200) NULL,
---PRIMARY KEY CLUSTERED 
---(
---	[IncomeSourceId] ASC
---)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
---) ON [PRIMARY]
---GO
---/****** Object:  Table [me].[TagGroupCategory]    Script Date: 07.12.2023 19:44:19 ******/
---SET ANSI_NULLS ON
---GO
---SET QUOTED_IDENTIFIER ON
---GO
---CREATE TABLE [me].[TagGroupCategory](
---	[TagGroupCategoryID] [int] IDENTITY(1,1) NOT NULL,
---	[TagGroupID] [int] NULL,
---	[CategoryID] [int] NULL
---) ON [PRIMARY]
---GO
+/****** Object:  Table [me].[Currency]    Script Date: 07.12.2023 19:44:19 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [me].[Currency](
+	[CurrencyID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](20) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[CurrencyID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [me].[Income]    Script Date: 07.12.2023 19:44:19 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [me].[Income](
+	[IncomeID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](200) NULL,
+	[CategoryID] [int] NULL,
+	[BagID] [int] NULL,
+	[Date] [datetime] NULL,
+	[TimeStamp] [timestamp] NOT NULL,
+	[CurrencyID] [int] NULL,
+	[Value] [decimal](6, 2) NULL,
+	[Cleared] [bit] NOT NULL,
+	[Comment] [varchar](2000) NULL,
+	[IncomeSourceId] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[IncomeID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [me].[IncomeSource]    Script Date: 07.12.2023 19:44:19 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [me].[IncomeSource](
+	[IncomeSourceId] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](200) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[IncomeSourceId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [me].[TagGroupCategory]    Script Date: 07.12.2023 19:44:19 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [me].[TagGroupCategory](
+	[TagGroupCategoryID] [int] IDENTITY(1,1) NOT NULL,
+	[TagGroupID] [int] NULL,
+	[CategoryID] [int] NULL
+) ON [PRIMARY]
+GO
 --/****** Object:  Table [me].[TagTagGroup]    Script Date: 07.12.2023 19:44:19 ******/
 --SET ANSI_NULLS ON
 --GO
