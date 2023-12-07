@@ -165,74 +165,7 @@ GO
   left join me.Tag t ON t.TagID=et.TagId
   left join me.TagGroup tg ON tg.TagGroupId=t.TagGroupId
   
-GO
-/****** Object:  View [ccw].[TransactionGroupInOrder]    Script Date: 07.12.2023 19:44:19 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE VIEW [ccw].[TransactionGroupInOrder] AS
-  select g.GroupId,t.Opening,t.[Date]
-   from [ccw].[Group] g
-  INNER JOIN [ccw].[TransactionGroup] tg ON g.GroupId=tg.GroupId
-  INNER JOIN [ccw].[Transaction] t ON t.TransactionId=tg.[TransactionId]
-  where t.Opening=1
-GO
-/****** Object:  View [ccw].[TransactionDetails]    Script Date: 07.12.2023 19:44:19 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
 
-CREATE VIEW [ccw].[TransactionDetails] as
-  select g.GroupId,g.closed,t.Opening,ttg.[date] as OpeningDate,t.[Date],
-  c1.Name as source, t.SourceAmount,t.SourceCurrencyEurExchange,
-  c2.Name as dest,t.DestAmount, t.DestCurrencyEurExchange,
-  ccw.GetSign(t.Opening)*t.SourceAmount*t.SourceCurrencyEurExchange as SrcInEur,
-  
-  ccw.GetSign(t.Opening)* t.DestAmount*t.DestCurrencyEurExchange as DstInEur,t.TransactionId,t.Comment
-  from [ccw].[Group] g
-  INNER JOIN [ccw].[TransactionGroup] tg ON g.GroupId=tg.GroupId
-  INNER JOIN [ccw].[Transaction] t ON t.TransactionId=tg.[TransactionId]
-  INNER JOIN [ccw].Currency c1 on t.SourceCurrency=c1.CurrencyId
-  INNER JOIN [ccw].Currency c2 on t.destCurrency=c2.CurrencyId
-  INNER JOIN [ccw].TransactionGroupInOrder ttg on ttg.[GroupId]=g.GroupId
-GO
-/****** Object:  View [ccw].[TransactionGains]    Script Date: 07.12.2023 19:44:19 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
-CREATE VIEW [ccw].[TransactionGains] as
-select g.GroupId,g.Closed,g.[Description],t.TransactionId,
-ccw.GetSign(t.Opening)*t.SourceAmount*t.SourceCurrencyEurExchange as 'SourceGain',
-ccw.GetSign(t.Opening)*t.DestAmount*t.DestCurrencyEurExchange as 'DestGain'
-from [ccw].[Group] g
-INNER JOIN [ccw].[TransactionGroup] tg ON g.GroupId=tg.GroupId
-INNER JOIN [ccw].[Transaction] t ON t.TransactionId=tg.[TransactionId]
-GO
-/****** Object:  View [ccw].[RealTransactionGains]    Script Date: 07.12.2023 19:44:19 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
-CREATE VIEW [ccw].[RealTransactionGains]
-AS
-  SELECT DISTINCT tg.[GroupId] ,tg.[Closed],tg.[Description],
-	     cost.SourceGain,gain.DestGain,cost.SourceGain+gain.DestGain AS 'RealGain'
-      
-  FROM [ccw].[TransactionGains] tg
-  inner join [ccw].[TransactionGains] cost on cost.[GroupId]=tg.[GroupId]
-  inner join [ccw].[TransactionGains] gain on gain.[GroupId]=tg.[GroupId]
-  where cost.SourceGain<0 and gain.[DestGain]>0
-GO
-/****** Object:  View [kameralne7].[BaseRaport]    Script Date: 07.12.2023 19:44:19 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
 
 CREATE VIEW [kameralne7].[BaseRaport] AS
 select r.BagName,r.CategoryName, r.ExpenseID,r.ExpenceName,r.ExpectedValue, r.[Value],r.Discount, r.ValueAfterDiscount,r.Free, r.Date
