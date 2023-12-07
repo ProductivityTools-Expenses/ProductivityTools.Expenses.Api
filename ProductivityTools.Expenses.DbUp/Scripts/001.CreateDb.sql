@@ -160,22 +160,6 @@ SELECT BagName, Year(Date) as 'Year', MONTH(Date) as 'Month',
   --where BagName='MagdaSetup'
   group by BagName, Year(Date), MONTH(Date)
 GO
-/****** Object:  View [kameralne7].[EstymacjaVsWydatek]    Script Date: 07.12.2023 19:44:19 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE VIEW [kameralne7].[EstymacjaVsWydatek] AS
-SELECT [Estymacja], sum([ExpectedValue]) AS ExpectedValue,
-	sUM([Value]) as SpentValue
-      ,sum([ExpectedValue])-sUM([Value]) as LeftToSpent
-
-  FROM [PawelDT].[kameralne7].[BaseRaport] 
-  WHERE  1=1 
-  and FREE=0
-  --and [Priorytet]='Priorytet1'
-  group by [Estymacja]
-GO
 /****** Object:  View [me].[Peugeot]    Script Date: 07.12.2023 19:44:19 ******/
 SET ANSI_NULLS ON
 GO
