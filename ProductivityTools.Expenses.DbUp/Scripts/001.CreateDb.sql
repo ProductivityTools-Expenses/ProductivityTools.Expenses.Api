@@ -10,39 +10,8 @@ GO
 /****** Object:  Schema [me]    Script Date: 07.12.2023 19:44:19 ******/
 CREATE SCHEMA [me]
 GO
-/****** Object:  Schema [misc]    Script Date: 07.12.2023 19:44:19 ******/
-CREATE SCHEMA [misc]
-GO
-/****** Object:  Schema [pm]    Script Date: 07.12.2023 19:44:19 ******/
-CREATE SCHEMA [pm]
-GO
-/****** Object:  Schema [salary]    Script Date: 07.12.2023 19:44:19 ******/
-CREATE SCHEMA [salary]
-GO
-/****** Object:  Schema [sallary]    Script Date: 07.12.2023 19:44:19 ******/
-CREATE SCHEMA [sallary]
-GO
-/****** Object:  Schema [schedule]    Script Date: 07.12.2023 19:44:19 ******/
-CREATE SCHEMA [schedule]
-GO
-/****** Object:  Schema [TEMP]    Script Date: 07.12.2023 19:44:19 ******/
-CREATE SCHEMA [TEMP]
-GO
-/****** Object:  UserDefinedFunction [ccw].[GetSign]    Script Date: 07.12.2023 19:44:19 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
 
-CREATE FUNCTION [ccw].[GetSign](@Opening BIT)
-RETURNS INT
-AS 
-BEGIN
-	IF (@Opening =1) RETURN -1
-	
-	RETURN 1
-END
-GO
+
 /****** Object:  Table [me].[Bag]    Script Date: 07.12.2023 19:44:19 ******/
 SET ANSI_NULLS ON
 GO
@@ -156,9 +125,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
-
- CREATE VIEW [me].[TagExpense] AS
+CREATE VIEW [me].[TagExpense] AS
   select r.BagName,r.CategoryName, r.ExpenseID,r.ExpenceName,tg.Name as 'TagGroup',t.Name as 'Tag',r.ExpectedValue, r.[Value]
   from me.Raport r
   left join me.ExpenseTag et ON r.ExpenseId=et.ExpenseId
@@ -192,7 +159,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
   
-  CREATE VIEW [me].[Summary] as
+ CREATE VIEW [me].[Summary] as
 with categories as
 (
 	select CategoryName,Free,SUM([value]) as 'CumulativeValue'
