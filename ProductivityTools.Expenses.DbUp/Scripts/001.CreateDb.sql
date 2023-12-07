@@ -133,31 +133,6 @@ CREATE VIEW [me].[TagExpense] AS
   left join me.TagGroup tg ON tg.TagGroupId=t.TagGroupId
   
 Go
-
-CREATE VIEW [kameralne7].[BaseRaport] AS
-select r.BagName,r.CategoryName, r.ExpenseID,r.ExpenceName,r.ExpectedValue, r.[Value],r.Discount, r.ValueAfterDiscount,r.Free, r.Date
-,priorytet.TagName as Priorytet
-,pomieszczenia.TagName as Pomieszczenia
-,typWydatku.TagName as TypWydatku
-,estimation.TagName as Estymacja
-FROM me.Raport r
-inner join kameralne7.ExpenseInTags priorytet ON r.ExpenseId=priorytet.ExpenseId
-inner join kameralne7.ExpenseInTags pomieszczenia ON r.ExpenseId=pomieszczenia.ExpenseId
-inner join kameralne7.ExpenseInTags typWydatku ON r.ExpenseId=typWydatku.ExpenseId
-inner join kameralne7.ExpenseInTags estimation ON r.ExpenseId=estimation.ExpenseId
-
-where r.BagName='kameralne7' 
-and priorytet.TagGroupName='priorytet'
-and pomieszczenia.TagGroupName='Pomieszczenia'
-and typWydatku.TagGroupName='TypWydatku'
-and estimation.TagGroupName='Estymacje'
-GO
-/****** Object:  View [me].[Summary]    Script Date: 07.12.2023 19:44:19 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
   
  CREATE VIEW [me].[Summary] as
 with categories as
