@@ -206,16 +206,7 @@ SELECT [BagName]
  
 GO
 /****** Object:  View [misc].[GiftSummary]    Script Date: 07.12.2023 19:44:19 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE VIEW [misc].[GiftSummary] as
-SELECT GiftId,a.FirstName,a.LastName,[Name]
-FROM [misc].[Gift] g
-INNER JOIN [gl].AddressBook a ON G.PersonId=a.AddressBookId
-GO
-/****** Object:  View [TEMP].[Kameralne7]    Script Date: 07.12.2023 19:44:19 ******/
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
