@@ -8,11 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Scripts\001.CreateDb2.sql" />
+    <None Remove="Scripts\001.CreateDb1.sql" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Scripts\001.CreateDb2.sql" />
+    <EmbeddedResource Include="Scripts\001.CreateDb1.sql" />
   </ItemGroup>
 
   <ItemGroup>
