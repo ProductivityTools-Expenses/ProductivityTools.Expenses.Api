@@ -36,6 +36,8 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<ExpensesContext>();
 
 var app = builder.Build();
+app.UseHttpsRedirection();
+app.UseStaticFiles();
 app.UseRouting();
 app.UseCors(MyAllowSpecificOrigins);
 app.UseAuthentication();
