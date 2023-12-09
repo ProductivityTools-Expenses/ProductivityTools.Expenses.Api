@@ -23,7 +23,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(MyAllowSpecificOrigins,
     builder =>
     {
-        builder.WithOrigins("http://localhost:3000", "https://localhost:3000", "https://agreeable-ocean-0d0923a10.4.azurestaticapps.net").AllowAnyMethod().AllowAnyHeader();
+        builder.WithOrigins("http://localhost:3000", "https://localhost:3000", "https://agreeable-ocean-0d0923a10.4.azurestaticapps.net", "https://agreeable-ocean-0d0923a10.4.azurestaticapps.net/").AllowAnyMethod().AllowAnyHeader();
     });
 });
 // Add services to the container.
