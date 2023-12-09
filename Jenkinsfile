@@ -22,16 +22,17 @@ pipeline {
                 url: 'https://github.com/ProductivityTools-Expenses/ProductivityTools.Expenses.Api.git'
             }
         }
+		stage('deleteDbMigratorDir') {
+            steps {
+                bat('if exist "C:\\Bin\\DbMigration\\Expenses.Api" RMDIR /Q/S "C:\\Bin\\DbMigration\\Expenses.Api"')
+            }
+        }
         stage('build') {
             steps {
                 bat(script: "dotnet publish ProductivityTools.Expenses.Api.sln -c Release", returnStdout: true)
             }
         }
-        stage('deleteDbMigratorDir') {
-            steps {
-                bat('if exist "C:\\Bin\\DbMigration\\Expenses.Api" RMDIR /Q/S "C:\\Bin\\DbMigration\\Expenses.Api"')
-            }
-        }
+ 
         stage('copyDbMigratdorFiles') {
             steps {           
                 bat('xcopy "ProductivityTools.Expenses.DbUp\\bin\\Release\\net6.0\\publish" "C:\\Bin\\DbMigration\\Expenses.Api\\" /O /X /E /H /K')
