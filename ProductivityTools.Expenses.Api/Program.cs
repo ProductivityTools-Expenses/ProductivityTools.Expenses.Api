@@ -23,7 +23,11 @@ builder.Services.AddCors(options =>
     options.AddPolicy(MyAllowSpecificOrigins,
     builder =>
     {
-        builder.WithOrigins("http://localhost:3000", "https://localhost:3000", "https://agreeable-ocean-0d0923a10.4.azurestaticapps.net").AllowAnyMethod().AllowAnyHeader();
+        builder.WithOrigins("http://localhost:3000",
+            "https://localhost:3000",
+            "https://agreeable-ocean-0d0923a10.4.azurestaticapps.net")
+        .AllowAnyMethod()
+        .AllowAnyHeader();
     });
 });
 // Add services to the container.
@@ -34,12 +38,8 @@ builder.Services.AddDbContext<ExpensesContext>();
 var app = builder.Build();
 app.UseRouting();
 app.UseCors(MyAllowSpecificOrigins);
-
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.UseHttpsRedirection();
-
 app.MapControllers();
-
 app.Run();
