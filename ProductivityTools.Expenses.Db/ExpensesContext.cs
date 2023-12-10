@@ -44,6 +44,7 @@ namespace ProductivityTools.Expenses.Database
         {
             modelBuilder.HasDefaultSchema("me");
             modelBuilder.Entity<Expense>().ToTable("Expense").HasKey(x => x.ExpenseId);
+            modelBuilder.Entity<Expense>().Property(x => x.ValueAfterDiscount).HasComputedColumnSql("[Value]-[Discount]");
             modelBuilder.Entity<Bag>().ToTable("Bag").HasKey(x => x.BagId);
             modelBuilder.Entity<Category>().ToTable("Category").HasKey(x => x.CategoryId);
 

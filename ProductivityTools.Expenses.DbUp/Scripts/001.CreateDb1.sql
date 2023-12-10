@@ -1,5 +1,4 @@
-﻿-/****** Object:  Schema [me]    Script Date: 07.12.2023 19:44:19 ******/
-CREATE SCHEMA [me]
+﻿CREATE SCHEMA [me]
 GO
 
 CREATE TABLE [me].[Bag](

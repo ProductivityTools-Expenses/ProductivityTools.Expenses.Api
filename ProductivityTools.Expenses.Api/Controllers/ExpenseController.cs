@@ -58,5 +58,18 @@ namespace ProductivityTools.Expenses.Api.Controllers
             var r = ExpensesContext.Categories.ToList();
             return r;
         }
+
+        public class s {
+            public string Name { get; set; }
+    }
+
+        [HttpPost]
+        [Route("Save")]
+        public StatusCodeResult Save(Expense expense)
+        {
+            ExpensesContext.Add(expense);
+            ExpensesContext.SaveChanges();
+            return Ok();
+        }
     }
 }
