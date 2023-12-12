@@ -10,9 +10,13 @@
   <ItemGroup>
     <None Remove="Scripts\001.CreateDb.sql" />
     <None Remove="Scripts\002.DropCurrency.sql" />
+    <None Remove="Scripts\003.NewFields.sql" />
+    <None Remove="Scripts\004.Free.sql" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Scripts\004.Free.sql" />
+    <EmbeddedResource Include="Scripts\003.NewFields.sql" />
     <EmbeddedResource Include="Scripts\002.DropCurrency.sql" />
     <EmbeddedResource Include="Scripts\001.CreateDb.sql" />
   </ItemGroup>
