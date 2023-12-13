@@ -1,0 +1,1 @@
+﻿ALTER TABLE me.Expense Add Cost as Amount*Price+Additions-Deductions

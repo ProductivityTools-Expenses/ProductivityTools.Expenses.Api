@@ -1,6 +1,6 @@
-﻿--UPDATE [me].[Expense] SET Amount=1 WHERE Amount IS NULL
---ALTER TABLE me.Expense ALTER COLUMN Amount int not null
---EXEC sp_rename 'me.Expense.Value', 'Price', 'COLUMN';
---ALTER TABLE me.Expense Add [Value] as Amount*Price
+﻿update [me].[expense] set amount=1 where amount is null
+alter table me.expense alter column amount int not null
+exec sp_rename 'me.expense.value', 'price', 'column';
+alter table me.expense add [value] as amount*price
 
 

@@ -13,9 +13,13 @@
     <None Remove="Scripts\003.NewFields.sql" />
     <None Remove="Scripts\004.Free.sql" />
     <None Remove="Scripts\005.Computedcolumns.sql" />
+    <None Remove="Scripts\006.Cost.sql" />
+    <None Remove="Scripts\007.Additions.sql" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Scripts\007.Additions.sql" />
+    <EmbeddedResource Include="Scripts\006.Cost.sql" />
     <EmbeddedResource Include="Scripts\005.Computedcolumns.sql" />
     <EmbeddedResource Include="Scripts\004.Free.sql" />
     <EmbeddedResource Include="Scripts\003.NewFields.sql" />
