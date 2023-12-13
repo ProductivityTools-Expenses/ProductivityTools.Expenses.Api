@@ -12,9 +12,11 @@
     <None Remove="Scripts\002.DropCurrency.sql" />
     <None Remove="Scripts\003.NewFields.sql" />
     <None Remove="Scripts\004.Free.sql" />
+    <None Remove="Scripts\005.Computedcolumns.sql" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Scripts\005.Computedcolumns.sql" />
     <EmbeddedResource Include="Scripts\004.Free.sql" />
     <EmbeddedResource Include="Scripts\003.NewFields.sql" />
     <EmbeddedResource Include="Scripts\002.DropCurrency.sql" />
