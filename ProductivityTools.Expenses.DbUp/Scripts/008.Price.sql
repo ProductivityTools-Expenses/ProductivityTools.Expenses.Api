@@ -7,4 +7,4 @@ ALTER TABLE me.Expense alter column price DECIMAL(7,2) not null
 EXEC sp_rename 'me.Expense.price', 'Price', 'COLUMN';
 
 ALTER TABLE me.Expense Add Cost as Amount*Price+Additions-Deductions
-alter table me.expense add [Value] as amount*price
+alter table me.expense add [Value] as Amount*Price

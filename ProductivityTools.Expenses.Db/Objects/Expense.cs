@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,12 +12,15 @@ namespace ProductivityTools.Expenses.Database.Objects
         public int? ExpenseId { get; set; }
         public string Name { get; set; }
         public DateTime? Date { get; set; }
-        public decimal? Value { get; set; }
         public decimal? ExpectedValue { get; set; }
-        public bool? Free { get; set; }
+
+        public int Amount { get; set; }
+        public decimal? Price { get; set; }
+        public decimal? Value { get; set; }
+        public decimal? Deductions { get; set; }
+        public decimal? Additions { get; set; }
+        public decimal? Cost { get; set; }
         public string? Comment { get; set; }
-        public decimal? Discount { get; set; }
-        public decimal? ValueAfterDiscount { get; set; }
 
 
         public int BagId { get; set; }  
