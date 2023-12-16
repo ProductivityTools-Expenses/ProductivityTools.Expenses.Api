@@ -9,15 +9,11 @@ namespace ProductivityTools.Expenses.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ExpenseController : ControllerBase
+    public class ExpenseController : ExpenseBaseController
     {
-        private readonly ILogger<WeatherForecastController> _logger;
-        private readonly ExpensesContext ExpensesContext;
 
-        public ExpenseController(ILogger<WeatherForecastController> logger, ExpensesContext expensesContext)
+        public ExpenseController(ILogger<WeatherForecastController> logger, ExpensesContext expensesContext):base(logger,expensesContext)
         {
-            _logger = logger;
-            this.ExpensesContext = expensesContext;
         }
 
         [HttpGet]
@@ -39,6 +35,10 @@ namespace ProductivityTools.Expenses.Api.Controllers
             {
                 r = r.Where(x => x.BagId == listRequest.BagId.Value).Include(x => x.Bag).Include(x => x.Category);
             }
+            if (listRequest.CategoryId.HasValue)
+            {
+                r = r.Where(x => x.CategoryId == listRequest.CategoryId.Value).Include(x => x.Bag).Include(x => x.Category);
+            }
             var result = r.ToList();
             return result;
         }
@@ -51,13 +51,7 @@ namespace ProductivityTools.Expenses.Api.Controllers
             return r;
         }
 
-        [HttpGet]
-        [Route("CagetoryList")]
-        public List<Category> CategoryList()
-        {
-            var r = ExpensesContext.Categories.ToList();
-            return r;
-        }
+       
 
         public class s {
             public string Name { get; set; }

@@ -9,7 +9,7 @@ namespace ProductivityTools.Expenses.Database.Objects
 {
     public class Category
     {
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; }
         public string Name { get; set; }
 
         [JsonIgnore]
