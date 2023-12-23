@@ -15,7 +15,12 @@ namespace ProductivityTools.Expenses.Database.Objects
 
         [JsonIgnore]
         public ICollection<Expense>? Expenses { get; set; }
+
+
         //[JsonIgnore]
-       // public List<BagCategory> BagCategories { get; set; } = new();
+        //public List<Category> Categories { get; set; }
+
+        [JsonIgnore]
+        public List<BagCategory> BagCategories { get; set; } = new();
     }
 }
