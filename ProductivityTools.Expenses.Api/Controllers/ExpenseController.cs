@@ -65,5 +65,19 @@ namespace ProductivityTools.Expenses.Api.Controllers
             ExpensesContext.SaveChanges();
             return Ok();
         }
+
+        [HttpPost]
+        [Route("Delete")]
+        public StatusCodeResult Delete(int expenseId)
+        {
+            var expense=ExpensesContext.Expenses.SingleOrDefault(x => x.ExpenseId == expenseId);
+            if (expense!=null)
+            {
+                ExpensesContext.Remove(expense);
+                ExpensesContext.SaveChanges();
+            }
+            
+            return Ok();
+        }
     }
 }
