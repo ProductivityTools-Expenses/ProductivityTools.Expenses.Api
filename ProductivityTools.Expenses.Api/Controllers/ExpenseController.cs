@@ -24,6 +24,17 @@ namespace ProductivityTools.Expenses.Api.Controllers
         }
 
         [HttpPost]
+        [Route("Get")]
+        [Authorize]
+        public Expense Get(ExpenseGetRequest expenseGetRequest)
+        {
+
+            var r = ExpensesContext.Expenses.SingleOrDefault(x => x.ExpenseId == expenseGetRequest.ExpenseId);
+            var result = r;
+            return result;
+        }
+
+        [HttpPost]
         [Route("List")]
         [Authorize]
         public List<Expense> List(ListRequest listRequest)
