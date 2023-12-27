@@ -72,7 +72,14 @@ namespace ProductivityTools.Expenses.Api.Controllers
         [Route("Save")]
         public StatusCodeResult Save(Expense expense)
         {
-            ExpensesContext.Add(expense);
+            if (expense.ExpenseId.HasValue)
+            {
+                ExpensesContext.Update(expense);
+            }
+            else
+            {
+                ExpensesContext.Add(expense);
+            }
             ExpensesContext.SaveChanges();
             return Ok();
         }
