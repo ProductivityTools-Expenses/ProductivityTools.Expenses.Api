@@ -54,13 +54,7 @@ namespace ProductivityTools.Expenses.Api.Controllers
             return result;
         }
 
-        [HttpGet]
-        [Route("BagList")]
-        public List<Bag> BagList()
-        {
-            var r = ExpensesContext.Bag.ToList();
-            return r;
-        }
+       
 
        
 

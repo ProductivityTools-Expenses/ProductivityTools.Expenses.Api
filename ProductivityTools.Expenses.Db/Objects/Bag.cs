@@ -9,7 +9,7 @@ namespace ProductivityTools.Expenses.Database.Objects
 {
     public class Bag
     {
-        public int BagId { get; set; }
+        public int? BagId { get; set; }
         public string Name { get; set; }
         public string? Description { get; set; }
 
