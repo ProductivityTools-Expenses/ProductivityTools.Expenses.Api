@@ -20,6 +20,14 @@ namespace ProductivityTools.Expenses.Api.Controllers
             return r;
         }
 
+        [HttpGet]
+        [Route("Get")]
+        public Bag Get(int bagId)
+        {
+            var r = ExpensesContext.Bag.Single(x => x.BagId == bagId);
+            return r;
+        }
+
         [HttpPost]
         [Route("Save")]
         public StatusCodeResult Save(Bag bag)
