@@ -28,6 +28,16 @@ namespace ProductivityTools.Expenses.Api.Controllers
             return r.ToList();
         }
 
+        [HttpGet]
+        [Route("CategoryListAll")]
+        public List<Category> CategoryListAll()
+        {
+            var r = ExpensesContext.Categories.AsQueryable();
+            
+
+            return r.ToList();
+        }
+
         [HttpPost]
         [Route("CategorySave")]
         public StatusCodeResult CategorySave(Category category)
