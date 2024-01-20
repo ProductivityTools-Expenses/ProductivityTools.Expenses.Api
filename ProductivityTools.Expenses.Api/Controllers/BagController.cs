@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using ProductivityTools.Expenses.Api.Requests;
 using ProductivityTools.Expenses.Database;
 using ProductivityTools.Expenses.Database.Objects;
 
@@ -24,25 +26,39 @@ namespace ProductivityTools.Expenses.Api.Controllers
         [Route("Get")]
         public Bag Get(int bagId)
         {
-            var r = ExpensesContext.Bag.Single(x => x.BagId == bagId);
+            var r = ExpensesContext.Bag.Include(x => x.BagCategories).Single(x => x.BagId == bagId);
             return r;
         }
 
         [HttpPost]
         [Route("Save")]
-        public StatusCodeResult Save(Bag bag)
+        public StatusCodeResult Save(EditBagSaveRequest saveBagRequest)
         {
-
-            if (bag.BagId.HasValue)
+            if (saveBagRequest.Bag.BagId.HasValue)
             {
-                ExpensesContext.Update(bag);
+                saveBagRequest.Categories.ForEach(x =>
+                {
+                    saveBagRequest.Bag.BagCategories.Add(new BagCategory()
+                    {
+                        BagId = saveBagRequest.Bag.BagId.Value,
+                        CategoryId = x.CategoryId,
+                        BagCategoryId = x.BagCategoryId
+                    }) ;
+                });
+
+
+                ExpensesContext.Update(saveBagRequest.Bag);
+
             }
             else
             {
-                ExpensesContext.Add(bag);
+                ExpensesContext.Add(saveBagRequest.Bag);
             }
+
             ExpensesContext.SaveChanges();
             return Ok();
         }
+
+
     }
 }

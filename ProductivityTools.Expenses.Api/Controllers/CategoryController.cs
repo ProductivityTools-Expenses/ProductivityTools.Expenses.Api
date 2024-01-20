@@ -2,6 +2,8 @@
 using ProductivityTools.Expenses.Database.Objects;
 using ProductivityTools.Expenses.Database;
 using ProductivityTools.Expenses.Api.Requests;
+using Microsoft.EntityFrameworkCore;
+using ProductivityTools.Expenses.Api.Responses;
 
 namespace ProductivityTools.Expenses.Api.Controllers
 {
@@ -17,15 +19,17 @@ namespace ProductivityTools.Expenses.Api.Controllers
 
         [HttpPost]
         [Route("CagetoryList")]
-        public List<Category> CategoryList(CategoryListRequest request)
+        public List<CategoryListResponse> CategoryList(CategoryListRequest request)
         {
-            var r = ExpensesContext.Categories.AsQueryable();
+            var r = ExpensesContext.Categories.Include(x => x.BagCategories).AsQueryable();
             if (request.BagId.HasValue)
             {
-               r=r.Where(x=>x.BagCategories.Any(bc=>bc.BagId==request.BagId.Value));
+                r = r.Where(x => x.BagCategories.Any(bc => bc.BagId == request.BagId.Value)).Include(x=>x.BagCategories);
             }
+            var responseResult = r.Select(x => new CategoryListResponse { CategoryId = x.CategoryId, Name = x.Name, BagCategoryId = x.BagCategories.First().BagCategoryId.Value });
             
-            return r.ToList();
+            var xx=responseResult.ToList();
+            return xx;
         }
 
         [HttpGet]

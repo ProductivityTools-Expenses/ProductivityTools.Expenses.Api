@@ -15,6 +15,7 @@ namespace ProductivityTools.Expenses.Database
 
         public DbSet<Category> Categories { get; set; }
 
+        public DbSet<BagCategory> BagCategories { get; set; }
 
         public ExpensesContext(IConfiguration configuration)
         {

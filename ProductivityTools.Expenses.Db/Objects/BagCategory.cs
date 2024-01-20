@@ -8,10 +8,10 @@ namespace ProductivityTools.Expenses.Database.Objects
 {
     public class BagCategory
     {
-        public int BagCategoryId { get; set; }
+        public int? BagCategoryId { get; set; }
         public int BagId { get; set; }
         public int CategoryId { get; set; }
-        public Bag Bag { get; set; } = new();
-        public Category Category { get; set; } = new();
+        public Bag Bag { get; set; } = null;
+        public Category Category { get; set; } = null;
     }
 }
