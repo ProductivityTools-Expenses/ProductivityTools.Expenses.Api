@@ -24,9 +24,10 @@ namespace ProductivityTools.Expenses.Api.Controllers
             var r = ExpensesContext.Categories.Include(x => x.BagCategories).AsQueryable();
             if (request.BagId.HasValue)
             {
+                var x = r.Where(x => x.BagCategories.Any(bc => bc.BagId == request.BagId.Value)).ToList();
                 r = r.Where(x => x.BagCategories.Any(bc => bc.BagId == request.BagId.Value)).Include(x=>x.BagCategories);
             }
-            var responseResult = r.Select(x => new CategoryListResponse { CategoryId = x.CategoryId, Name = x.Name, BagCategoryId = x.BagCategories.First().BagCategoryId.Value });
+            var responseResult = r.Select(x => new CategoryListResponse { CategoryId = x.CategoryId, Name = x.Name, BagCategoryId = x.BagCategories.Where(x=>x.BagId==request.BagId).First().BagCategoryId.Value });
             
             var xx=responseResult.ToList();
             return xx;
