@@ -59,6 +59,18 @@ namespace ProductivityTools.Expenses.Api.Controllers
             return Ok();
         }
 
+        [HttpPost]
+        [Route("RemoveCategoryFromBagCategory")]
+        public StatusCodeResult RemoveCategoryFromBagCategory(List<int>  removeCategoryFromBagCategoryRequest)
+        {
+
+            var bagCategories = ExpensesContext.BagCategories.Where(x => removeCategoryFromBagCategoryRequest.Contains(x.BagCategoryId.Value));
+            ExpensesContext.BagCategories.RemoveRange(bagCategories);
+
+            ExpensesContext.SaveChanges();
+            return Ok();
+        }
+
 
     }
 }
