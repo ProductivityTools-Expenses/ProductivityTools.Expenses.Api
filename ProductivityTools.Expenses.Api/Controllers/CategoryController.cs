@@ -38,16 +38,33 @@ namespace ProductivityTools.Expenses.Api.Controllers
         public List<Category> CategoryListAll()
         {
             var r = ExpensesContext.Categories.AsQueryable();
-            
-
             return r.ToList();
         }
+
+        [HttpGet]
+        [Route("Category")]
+        public Category Category(int categoryId)
+        {
+            var r = ExpensesContext.Categories.FirstOrDefault(x => x.CategoryId == categoryId);
+            return r;
+        }
+
+
 
         [HttpPost]
         [Route("CategorySave")]
         public StatusCodeResult CategorySave(Category category)
         {
-            var r = ExpensesContext.Categories.Add(category);
+
+
+            if (category.CategoryId.HasValue)
+            {
+                var r = ExpensesContext.Categories.Update(category);
+            }
+            else
+            {
+                var r = ExpensesContext.Categories.Add(category);
+            }
             ExpensesContext.SaveChanges();
             return Ok();
         }
