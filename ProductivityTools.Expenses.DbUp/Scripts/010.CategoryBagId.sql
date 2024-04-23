@@ -1,0 +1,7 @@
+﻿
+
+ALTER TABLE me.Category ADD BagId INT NULL
+
+ALTER TABLE me.Category
+ADD CONSTRAINT FK_Category_Bag FOREIGN KEY (BagId)
+REFERENCES me.Bag(BagId)

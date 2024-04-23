@@ -17,9 +17,13 @@
     <None Remove="Scripts\007.Additions.sql" />
     <None Remove="Scripts\008.Price.sql" />
     <None Remove="Scripts\009.CategoryLength.sql" />
+    <None Remove="Scripts\010.CategoryBagId.sql" />
+    <None Remove="Scripts\011.InsertBagIds.sql" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Scripts\011.InsertBagIds.sql" />
+    <EmbeddedResource Include="Scripts\010.CategoryBagId.sql" />
     <EmbeddedResource Include="Scripts\009.CategoryLength.sql" />
     <EmbeddedResource Include="Scripts\008.Price.sql" />
     <EmbeddedResource Include="Scripts\007.Additions.sql" />
