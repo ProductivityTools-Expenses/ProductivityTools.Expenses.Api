@@ -15,10 +15,11 @@ namespace ProductivityTools.Expenses.Database.Objects
         [JsonIgnore]
         public ICollection<Expense>? Expenses { get; set; }
 
-        //[JsonIgnore]
-        //public List<Bag> Bags { get; set; }
-
+        public int BagId { get; set; }
         [JsonIgnore]
-        public List<BagCategory> BagCategories { get; set; } = new();
+        public Bag? Bag { get; set; }
+
+        //[JsonIgnore]
+        //public List<BagCategory> BagCategories { get; set; } = new();
     }
 }
