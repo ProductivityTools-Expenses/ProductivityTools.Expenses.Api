@@ -15,7 +15,7 @@ namespace ProductivityTools.Expenses.Database.Objects
         [JsonIgnore]
         public ICollection<Expense>? Expenses { get; set; }
 
-        public int BagId { get; set; }
+        public int? BagId { get; set; }//teporary for migration remove the nullable
         [JsonIgnore]
         public Bag? Bag { get; set; }
 

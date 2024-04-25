@@ -26,7 +26,7 @@ namespace ProductivityTools.Expenses.Api.Controllers
         [Route("Get")]
         public Bag Get(int bagId)
         {
-            var r = ExpensesContext.Bag.Include(x => x.BagCategories).Single(x => x.BagId == bagId);
+            var r = ExpensesContext.Bag.Include(x => x.Categories).Single(x => x.BagId == bagId);
             return r;
         }
 
@@ -36,15 +36,15 @@ namespace ProductivityTools.Expenses.Api.Controllers
         {
             if (saveBagRequest.Bag.BagId.HasValue)
             {
-                saveBagRequest.Categories.ForEach(x =>
-                {
-                    saveBagRequest.Bag.BagCategories.Add(new BagCategory()
-                    {
-                        BagId = saveBagRequest.Bag.BagId.Value,
-                        CategoryId = x.CategoryId,
-                        BagCategoryId = x.BagCategoryId
-                    }) ;
-                });
+                //saveBagRequest.Categories.ForEach(x =>
+                //{
+                //    saveBagRequest.Bag.BagCategories.Add(new BagCategory()
+                //    {
+                //        BagId = saveBagRequest.Bag.BagId.Value,
+                //        CategoryId = x.CategoryId,
+                //        BagCategoryId = x.BagCategoryId
+                //    }) ;
+                //});
 
 
                 ExpensesContext.Update(saveBagRequest.Bag);
@@ -64,8 +64,8 @@ namespace ProductivityTools.Expenses.Api.Controllers
         public StatusCodeResult RemoveCategoryFromBagCategory(List<int>  removeCategoryFromBagCategoryRequest)
         {
 
-            var bagCategories = ExpensesContext.BagCategories.Where(x => removeCategoryFromBagCategoryRequest.Contains(x.BagCategoryId.Value));
-            ExpensesContext.BagCategories.RemoveRange(bagCategories);
+            //var bagCategories = ExpensesContext.BagCategories.Where(x => removeCategoryFromBagCategoryRequest.Contains(x.BagCategoryId.Value));
+            //ExpensesContext.BagCategories.RemoveRange(bagCategories);
 
             ExpensesContext.SaveChanges();
             return Ok();
