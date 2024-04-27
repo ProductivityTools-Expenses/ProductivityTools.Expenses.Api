@@ -4,6 +4,7 @@ using ProductivityTools.Expenses.Database;
 using ProductivityTools.Expenses.Api.Requests;
 using Microsoft.EntityFrameworkCore;
 using ProductivityTools.Expenses.Api.Responses;
+using Azure.Core;
 
 namespace ProductivityTools.Expenses.Api.Controllers
 {
@@ -21,12 +22,17 @@ namespace ProductivityTools.Expenses.Api.Controllers
         [Route("CagetoryList")]
         public List<Category> CategoryList(CategoryListRequest request)
         {
-            var r = ExpensesContext.Categories.ToList();
-            if (request.BagId.HasValue)
-            {
-                 r = r.Where(x => x.BagId== request.BagId.Value).ToList();
-                //r = r.Where(x => x.BagCategories.Any(bc => bc.BagId == request.BagId.Value)).Include(x=>x.BagCategories);
-            }
+            //it is ok when bagId is null, than only categories where no bag is assigned should be returned
+            var r = ExpensesContext.Categories.Where(x => x.BagId == request.BagId);
+            //if (request.BagId.HasValue)
+            //{
+            //     r = r.Where(x => x.BagId== request.BagId.Value);
+            //    //r = r.Where(x => x.BagCategories.Any(bc => bc.BagId == request.BagId.Value)).Include(x=>x.BagCategories);
+            //}
+            //else
+            //{
+            //    r=r.Where(x=>x.BagId==)
+            //}
             //var responseResult = r.Select(x => new CategoryListResponse { CategoryId = x.CategoryId, Name = x.Name, BagCategoryId = x.BagCategories.Where(x=>x.BagId==request.BagId).First().BagCategoryId.Value });
             
             //var xx=responseResult.ToList();
