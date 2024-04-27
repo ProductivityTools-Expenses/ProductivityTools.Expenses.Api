@@ -1,0 +1,1 @@
+﻿DELETE me.BagCategory where BagId is null
