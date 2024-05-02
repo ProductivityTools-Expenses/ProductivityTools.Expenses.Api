@@ -23,11 +23,13 @@
     <None Remove="Scripts\013.ArchiveBagCategory.sql" />
     <None Remove="Scripts\014.DropConstraints.sql" />
     <None Remove="Scripts\015.UpdateIncome.sql" />
-    <None Remove="Scripts\016.RemoveBagCategories.sql" />
+    <None Remove="Scripts\016.UpdateTags.sql" />
+    <None Remove="Scripts\017.OldCategories.sql" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Scripts\016.RemoveBagCategories.sql" />
+    <EmbeddedResource Include="Scripts\016.UpdateTags.sql" />
+    <EmbeddedResource Include="Scripts\017.OldCategories.sql" />
     <EmbeddedResource Include="Scripts\015.UpdateIncome.sql" />
     <EmbeddedResource Include="Scripts\014.DropConstraints.sql" />
     <EmbeddedResource Include="Scripts\013.ArchiveBagCategory.sql" />
