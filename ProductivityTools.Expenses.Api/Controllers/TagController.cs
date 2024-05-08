@@ -9,8 +9,10 @@ namespace ProductivityTools.Expenses.Api.Controllers
     [Route("[controller]")]
     public class TagController : ExpenseBaseController
     {
-        public TagController(ILogger<WeatherForecastController> logger, ExpensesContext expensesContext) : base(logger, expensesContext)
+        IQueries Queries { get; set; }
+        public TagController(ILogger<WeatherForecastController> logger, ExpensesContext expensesContext, IQueries queries) : base(logger, expensesContext)
         {
+            this.Queries = queries; 
         }
 
 
@@ -21,6 +23,15 @@ namespace ProductivityTools.Expenses.Api.Controllers
             var expenseTags = this.ExpensesContext.ExpenseTag.Include(x=>x.Tag).Where(x => expensesId.Contains(x.ExpenseId)).ToList();
            // var tags = expenseTags.Select(x => x.Tag);
             return expenseTags;
+        }
+
+        [HttpPost]
+        [Route("GetTagsSummary")]
+        public string GetTagsSummary(int tagId)
+        {
+            Queries.GetTagsSummary(tagId);
+            // var tags = expenseTags.Select(x => x.Tag);
+            return "fdsa";
         }
     }
 }

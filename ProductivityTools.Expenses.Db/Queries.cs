@@ -7,14 +7,23 @@ using System.Threading.Tasks;
 
 namespace ProductivityTools.Expenses.Database
 {
-    internal class Queries
+    public interface IQueries
+    {
+        void GetTagsSummary(int tagId);
+    }
+    public class Queries : IQueries
     {
         private readonly ExpensesContext expensesContext;
-        public Queries(ExpensesContext context) { }
+        public Queries(ExpensesContext context)
+        {
+            this.expensesContext = context;
 
-        public void GetTagsSummary()
+        }
+
+        public void GetTagsSummary(int tagId)
         {
             var results = expensesContext.Database.SqlQuery<int>($"SELECT COUNT(*) FROM Books");
+            Console.Write("fdsa)");
         }
     }
 }

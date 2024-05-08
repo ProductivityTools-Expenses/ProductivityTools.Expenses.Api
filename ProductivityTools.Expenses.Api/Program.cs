@@ -34,7 +34,7 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddControllers();
 builder.Services.AddDbContext<ExpensesContext>();
-
+builder.Services.AddScoped<IQueries, Queries>();
 var app = builder.Build();
 //app.UseHttpsRedirection();
 //app.UseStaticFiles();
