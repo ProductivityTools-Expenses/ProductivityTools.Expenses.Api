@@ -27,11 +27,11 @@ namespace ProductivityTools.Expenses.Api.Controllers
 
         [HttpPost]
         [Route("GetTagsSummary")]
-        public string GetTagsSummary(int tagId)
+        public IEnumerable<TagGroupSummary> GetTagsSummary(int tagId)
         {
-            Queries.GetTagsSummary(tagId);
+            var r=Queries.GetTagsSummary(tagId);
             // var tags = expenseTags.Select(x => x.Tag);
-            return "fdsa";
+            return r;
         }
     }
 }
