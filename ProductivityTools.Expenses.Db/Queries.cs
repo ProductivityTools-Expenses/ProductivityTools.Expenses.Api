@@ -29,7 +29,7 @@ namespace ProductivityTools.Expenses.Database
                     inner join me.ExpenseTag et on e.ExpenseId=et.ExpenseId
                     inner join me.Tag t on et.TagID=t.TagID
                     where t.TagGroupID in (
-                        select TagGroupID from me.Tag where TagID=1)
+                        select TagGroupID from me.Tag where TagID={tagId})
                 )
                 select TagName,Sum(Value) as ValueSum
             from query group by TagName");

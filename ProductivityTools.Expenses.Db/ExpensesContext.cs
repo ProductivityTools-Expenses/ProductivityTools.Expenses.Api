@@ -38,7 +38,7 @@ namespace ProductivityTools.Expenses.Database
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(configuration.GetConnectionString("PTExpenses"));
+                optionsBuilder.UseSqlServer(configuration.GetConnectionString("PTExpenses"), o=>o.UseCompatibilityLevel(120));
                 optionsBuilder.UseLoggerFactory(GetLoggerFactory());
                 optionsBuilder.EnableSensitiveDataLogging();
                 base.OnConfiguring(optionsBuilder);

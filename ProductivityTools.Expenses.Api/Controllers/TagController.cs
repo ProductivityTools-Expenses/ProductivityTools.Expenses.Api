@@ -25,7 +25,7 @@ namespace ProductivityTools.Expenses.Api.Controllers
             return expenseTags;
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("GetTagsSummary")]
         public IEnumerable<TagGroupSummary> GetTagsSummary(int tagId)
         {
