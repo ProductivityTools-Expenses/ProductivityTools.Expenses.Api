@@ -36,7 +36,13 @@ namespace ProductivityTools.Expenses.Database
             var x = results.ToList();
             return x;
         }
+
+        public void GetTagGroup(int tagId)
+        {
+
+        }
     }
+
 }
 
 

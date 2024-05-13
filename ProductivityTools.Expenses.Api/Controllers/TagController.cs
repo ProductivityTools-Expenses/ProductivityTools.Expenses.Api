@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using ProductivityTools.Expenses.Database;
 using ProductivityTools.Expenses.Database.Objects;
+using System.Reflection.PortableExecutable;
 
 namespace ProductivityTools.Expenses.Api.Controllers
 {
@@ -33,5 +34,17 @@ namespace ProductivityTools.Expenses.Api.Controllers
             // var tags = expenseTags.Select(x => x.Tag);
             return r;
         }
+
+
+        [HttpGet]
+        [Route("GetTagGroup")]
+        public TagGroup GetTagGroup(int tagId)
+        {
+            var r = this.ExpensesContext.Tags.Include(x => x.TagGroup).Single(x => x.TagId == tagId);
+            // var tags = expenseTags.Select(x => x.Tag);
+            return r.TagGroup;
+        }
+
+
     }
 }

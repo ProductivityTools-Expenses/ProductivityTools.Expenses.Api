@@ -7,18 +7,12 @@ using System.Threading.Tasks;
 
 namespace ProductivityTools.Expenses.Database.Objects
 {
-    public class Tag
+    public class TagGroup
     {
-        public int TagId { get; set; }
-        public string Name { get; set; }
-        
         public int TagGroupId { get; set; }
+        public string Name { get; set; }
 
         [JsonIgnore]
-        public ICollection<ExpenseTag> ExpenseTags { get; set; }
-
-
-        [JsonIgnore]
-        public TagGroup TagGroup { get; set; }
+        public ICollection<Tag> Tags { get; set; }
     }
 }
