@@ -54,9 +54,30 @@ namespace ProductivityTools.Expenses.Api.Controllers
             return result;
         }
 
-       
+        [HttpGet]
+        [Route("GetExpensesByTag")]
+        [Authorize]
+        public List<Expense> ListByTag(int tagId)
+        {
 
-       
+            var expensesIds = ExpensesContext.ExpenseTag.Where(x => x.TagId == tagId).Select(x => x.ExpenseId).ToList();
+            var expenses = ExpensesContext.Expenses.Where(x => expensesIds.Contains(x.ExpenseId.Value));
+
+            //    .Include(x => x.Bag).Include(x => x.Category)
+            //    .Where(x=>x.tag)
+            //if (listRequest.BagId.HasValue)
+            //{
+            //    r = r.Where(x => x.BagId == listRequest.BagId.Value).Include(x => x.Bag).Include(x => x.Category);
+            //}
+            //if (listRequest.CategoryId.HasValue)
+            //{
+            //    r = r.Where(x => x.CategoryId == listRequest.CategoryId.Value).Include(x => x.Bag).Include(x => x.Category);
+            //}
+            var result = expenses.ToList();
+            return result;
+        }
+
+
 
         public class s {
             public string Name { get; set; }
