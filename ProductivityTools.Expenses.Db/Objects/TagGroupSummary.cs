@@ -8,6 +8,7 @@ namespace ProductivityTools.Expenses.Database.Objects
 {
     public class TagGroupSummary
     {
+        public int TagId { get; set; }
         public string TagName { get; set; }
         public decimal ValueSum { get; set; }
     }

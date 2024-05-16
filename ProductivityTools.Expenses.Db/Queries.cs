@@ -25,14 +25,14 @@ namespace ProductivityTools.Expenses.Database
         {
             var results = expensesContext.Database.SqlQuery<TagGroupSummary>($@"with query as
                 (
-                select t.Name as TagName, Value from [me].Expense e
+                select t.TagId, t.Name as TagName, Value from [me].Expense e
                     inner join me.ExpenseTag et on e.ExpenseId=et.ExpenseId
                     inner join me.Tag t on et.TagID=t.TagID
                     where t.TagGroupID in (
                         select TagGroupID from me.Tag where TagID={tagId})
                 )
-                select TagName,Sum(Value) as ValueSum
-            from query group by TagName");
+                select TagId, TagName,Sum(Value) as ValueSum
+            from query group by TagId, TagName");
             var x = results.ToList();
             return x;
         }
