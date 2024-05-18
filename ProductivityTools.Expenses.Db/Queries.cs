@@ -25,13 +25,13 @@ namespace ProductivityTools.Expenses.Database
         {
             var results = expensesContext.Database.SqlQuery<TagGroupSummary>($@"with query as
                 (
-                select t.TagId, t.Name as TagName, Value from [me].Expense e
+                select t.TagId, t.Name as TagName, Value,cost from [me].Expense e
                     inner join me.ExpenseTag et on e.ExpenseId=et.ExpenseId
                     inner join me.Tag t on et.TagID=t.TagID
                     where t.TagGroupID in (
                         select TagGroupID from me.Tag where TagID={tagId})
                 )
-                select TagId, TagName,Sum(Value) as ValueSum
+                select TagId, TagName,Sum(Value) as ValueSum, sum (cost) as CostSum
             from query group by TagId, TagName");
             var x = results.ToList();
             return x;
@@ -58,4 +58,27 @@ namespace ProductivityTools.Expenses.Database
 //from query group by TagName
 
 
+
+//Doble category
+//with ex1 as 
+// (select e.ExpenseID, t.TagId, t.Name as TagName, Value, cost from [me].Expense e
+//        inner join me.ExpenseTag et on e.ExpenseId=et.ExpenseId
+//        inner join me.Tag t on et.TagID=t.TagID
+//        where t.TagGroupID in (
+//            select TagGroupID from me.Tag where TagID=20)
+//			)
+//			select  ExpenseID,sum(1) from ex1
+//			group by ExpenseID
+//			order by sum(1) desc
+
+
+//			 with ex1 as 
+// (select e.ExpenseID, t.TagId, t.Name as TagName, Value, cost from [me].Expense e
+//        inner join me.ExpenseTag et on e.ExpenseId=et.ExpenseId
+//        inner join me.Tag t on et.TagID=t.TagID
+//        where t.TagGroupID in (
+//            select TagGroupID from me.Tag where TagID=20)
+//			)
+//			select  * from ex1
+//		where ExpenseID=732
 
