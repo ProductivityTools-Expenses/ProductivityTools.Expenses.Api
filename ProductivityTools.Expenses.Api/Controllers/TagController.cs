@@ -18,7 +18,7 @@ namespace ProductivityTools.Expenses.Api.Controllers
 
 
         [HttpPost]
-        [Route("GetTags")]
+        [Route("TagList")]
         public IEnumerable<ExpenseTag> GetTags(List<int> expensesId)
         {
             var expenseTags = this.ExpensesContext.ExpenseTag.Include(x=>x.Tag).Where(x => expensesId.Contains(x.ExpenseId)).ToList();

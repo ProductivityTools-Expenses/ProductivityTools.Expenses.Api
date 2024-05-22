@@ -24,7 +24,7 @@ namespace ProductivityTools.Expenses.Api.Controllers
         }
 
         [HttpPost]
-        [Route("Get")]
+        [Route("ExpenseGet")]
         [Authorize]
         public Expense Get(ExpenseGetRequest expenseGetRequest)
         {
