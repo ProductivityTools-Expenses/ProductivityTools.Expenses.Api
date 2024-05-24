@@ -45,6 +45,15 @@ namespace ProductivityTools.Expenses.Api.Controllers
             return r.TagGroup;
         }
 
+        [HttpPost]
+        [Route("RemoveTagFromExpense")]
+        public bool RemoveTagFromExpense(int expenseTagId)
+        {
+            var expenseTag=this.ExpensesContext.ExpenseTag.Single(x => x.ExpenseTagId == expenseTagId);
+            this.ExpensesContext.Remove(expenseTag);
+            return true;
+        }
+
 
     }
 }
