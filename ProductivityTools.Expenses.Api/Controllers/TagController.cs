@@ -51,6 +51,7 @@ namespace ProductivityTools.Expenses.Api.Controllers
         {
             var expenseTag=this.ExpensesContext.ExpenseTag.Single(x => x.ExpenseTagId == expenseTagId);
             this.ExpensesContext.Remove(expenseTag);
+            this.ExpensesContext.SaveChanges();
             return true;
         }
 

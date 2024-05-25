@@ -78,11 +78,6 @@ namespace ProductivityTools.Expenses.Api.Controllers
         }
 
 
-
-        public class s {
-            public string Name { get; set; }
-    }
-
         [HttpPost]
         [Route("Save")]
         public StatusCodeResult Save(Expense expense)
