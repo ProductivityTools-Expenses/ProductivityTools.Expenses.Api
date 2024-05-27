@@ -14,5 +14,9 @@ namespace ProductivityTools.Expenses.Database.Objects
 
         [JsonIgnore]
         public ICollection<Tag> Tags { get; set; }
+
+        [JsonIgnore]
+        public ICollection<TagGroupCategory> TagGroupCategories { get; set; }
+
     }
 }
