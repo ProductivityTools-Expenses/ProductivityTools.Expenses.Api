@@ -9,7 +9,7 @@ namespace ProductivityTools.Expenses.Database.Objects
 {
     public class ExpenseTag
     {
-        public int ExpenseTagId { get; set; }
+        public int? ExpenseTagId { get; set; }
         public int ExpenseId { get; set; }
         public int TagId { get; set; }
 

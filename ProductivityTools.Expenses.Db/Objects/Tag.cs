@@ -15,10 +15,10 @@ namespace ProductivityTools.Expenses.Database.Objects
         public int TagGroupId { get; set; }
 
         [JsonIgnore]
-        public ICollection<ExpenseTag> ExpenseTags { get; set; }
+        public ICollection<ExpenseTag>? ExpenseTags { get; set; }
 
 
         [JsonIgnore]
-        public TagGroup TagGroup { get; set; }
+        public TagGroup? TagGroup { get; set; }
     }
 }

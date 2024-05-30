@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ProductivityTools.Expenses.Api.Requests;
 using ProductivityTools.Expenses.Database;
 using ProductivityTools.Expenses.Database.Objects;
 using System.Reflection.PortableExecutable;
@@ -67,8 +68,33 @@ namespace ProductivityTools.Expenses.Api.Controllers
         [Route("GetTagGroupForCategory")]
         public List<TagGroup> GetTagGroupForCategory(int categoryId)
         {
-            var tagGroups=this.ExpensesContext.TagGroupCategory.Where(x => x.CategoryId == categoryId).Select(x=>x.TagGroup).ToList();
+            var tagGroups = this.ExpensesContext.TagGroupCategory.Where(x => x.CategoryId == categoryId).Select(x => x.TagGroup).ToList();
             return tagGroups;
+        }
+
+        [HttpPost]
+        [Route("SaveTags")]
+        public IActionResult SaveTags(SaveTagsRequest saveTagsRequest)
+        {
+            var expenseTagsInDb = this.ExpensesContext.ExpenseTag.Where(x => x.ExpenseId == saveTagsRequest.Expense.ExpenseId).ToList();
+
+            foreach (var expenseTag in saveTagsRequest.ExpenseTags)
+            {
+                if (expenseTag.ExpenseTagId != null)
+                {
+                    expenseTagsInDb.Remove(expenseTagsInDb.First(x => x.ExpenseTagId == expenseTag.ExpenseTagId));
+                }
+                else
+                {
+                    this.ExpensesContext.Add(expenseTag);
+                }
+            }
+            foreach(var expenseTagInDb in expenseTagsInDb)
+            {
+                this.ExpensesContext.Remove(expenseTagInDb);
+            }
+            ExpensesContext.SaveChanges();
+            return Ok();
         }
 
 
