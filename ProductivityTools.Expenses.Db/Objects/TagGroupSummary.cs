@@ -11,5 +11,7 @@ namespace ProductivityTools.Expenses.Database.Objects
         public int TagId { get; set; }
         public string TagName { get; set; }
         public decimal ValueSum { get; set; }
+
+        public decimal CostSum { get; set; }
     }
 }
