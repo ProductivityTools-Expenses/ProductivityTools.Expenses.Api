@@ -97,6 +97,11 @@ namespace ProductivityTools.Expenses.Api.Controllers
             return Ok();
         }
 
-
+        /*
+  select * from me.tag t
+  inner join me.TagGroup tg on t.TagGroupID=tg.TagGroupID
+  inner join me.tagGroupCategory tgc on tg.TagGroupId=tgc.tagGroupid
+  inner join me.Category c on tgc.CategoryID=c.CategoryID
+        */
     }
 }
