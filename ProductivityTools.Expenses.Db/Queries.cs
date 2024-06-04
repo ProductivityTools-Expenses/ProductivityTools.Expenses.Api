@@ -11,6 +11,7 @@ namespace ProductivityTools.Expenses.Database
     public interface IQueries
     {
         IEnumerable<TagGroupSummary> GetTagsSummary(int tagId);
+        IEnumerable<Category> GetCategoriesForTagGroup(int tagId);
     }
     public class Queries : IQueries
     {
@@ -37,9 +38,17 @@ namespace ProductivityTools.Expenses.Database
             return x;
         }
 
-        public void GetTagGroup(int tagId)
+        public List<Category> GetCategoriesForTagGroup(int tagId)
         {
-
+            var results = expensesContext.Database.SqlQuery<Category>($@"
+  select distinct c.Name,c.CategoryID,c.BagId from me.tag t
+  inner join me.TagGroup tg on t.TagGroupID=tg.TagGroupID
+  inner join me.tagGroupCategory tgc on tg.TagGroupId=tgc.tagGroupid
+  inner join me.Category c on tgc.CategoryID=c.CategoryID
+  where tg.TagGroupID=${tagId}
+");
+            var x = results.ToList();
+            return x;
         }
     }
 
