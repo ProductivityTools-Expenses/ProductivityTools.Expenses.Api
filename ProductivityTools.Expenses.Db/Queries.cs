@@ -38,7 +38,7 @@ namespace ProductivityTools.Expenses.Database
             return x;
         }
 
-        public List<Category> GetCategoriesForTagGroup(int tagId)
+        public IEnumerable<Category> GetCategoriesForTagGroup(int tagId)
         {
             var results = expensesContext.Database.SqlQuery<Category>($@"
   select distinct c.Name,c.CategoryID,c.BagId from me.tag t
