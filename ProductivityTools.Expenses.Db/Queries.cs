@@ -40,12 +40,12 @@ namespace ProductivityTools.Expenses.Database
 
         public IEnumerable<Category> GetCategoriesForTagGroup(int tagId)
         {
-            var results = expensesContext.Database.SqlQuery<Category>($@"
+            var results = expensesContext.Categories.FromSql($@"
   select distinct c.Name,c.CategoryID,c.BagId from me.tag t
   inner join me.TagGroup tg on t.TagGroupID=tg.TagGroupID
   inner join me.tagGroupCategory tgc on tg.TagGroupId=tgc.tagGroupid
   inner join me.Category c on tgc.CategoryID=c.CategoryID
-  where tg.TagGroupID=${tagId}
+  where tg.TagGroupID={tagId}
 ");
             var x = results.ToList();
             return x;
