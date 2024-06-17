@@ -27,6 +27,18 @@ namespace ProductivityTools.Expenses.Api.Controllers
             return expenseTags;
         }
 
+
+
+       
+        [HttpGet]
+        [Route("GetAllTags")]
+        public IEnumerable<Tag> GetAllTags()
+        {
+            var tags = this.ExpensesContext.Tags.ToList();
+            // var tags = expenseTags.Select(x => x.Tag);
+            return tags;
+        }
+
         [HttpPost]
         [Route("GetTagsByTagGroupId")]
         public IEnumerable<Tag> GetTagsByTagGroupId(int tagGroupId)
