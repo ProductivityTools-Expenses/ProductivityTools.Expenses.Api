@@ -24,6 +24,8 @@ namespace ProductivityTools.Expenses.Database
         //public DbSet<BagCategory> BagCategories { get; set; }
         public DbSet<Tag> Tags { get; set; }
 
+        public DbSet<TagGroup> TagGroups { get; set; }
+
         public ExpensesContext(IConfiguration configuration)
         {
             this.configuration = configuration;
@@ -77,6 +79,9 @@ namespace ProductivityTools.Expenses.Database
             modelBuilder.Entity<Tag>().ToTable("Tag").HasOne(x => x.TagGroup).WithMany(e => e.Tags).HasForeignKey(x => x.TagGroupId);
 
             modelBuilder.Entity<TagGroupCategory>().ToTable("TagGroupCategory").HasOne(x => x.TagGroup).WithMany(x => x.TagGroupCategories);
+
+            modelBuilder.Entity<TagGroup>().ToTable("TagGroup");
+
 
             //modelBuilder.Entity<Account>().HasMany(x => x.TransfersSource).WithOne(x => x.Source).HasForeignKey(x => x.SourceId).HasPrincipalKey(x => x.AccountId);
             //modelBuilder.Entity<Account>().HasMany(x => x.TransfersTarget).WithOne(x => x.Target).HasForeignKey(x => x.TargetId).HasPrincipalKey(x => x.AccountId);
