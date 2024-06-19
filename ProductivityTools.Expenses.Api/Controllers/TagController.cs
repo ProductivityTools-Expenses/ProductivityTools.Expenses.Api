@@ -108,6 +108,18 @@ namespace ProductivityTools.Expenses.Api.Controllers
         }
 
         [HttpPost]
+        [Route("addTagGroupToCategory")]
+        public bool AddTagGroupForCategory(int tagGroupId, int categoryId)
+        {
+            TagGroupCategory tgc=new TagGroupCategory();
+            tgc.CategoryId = categoryId;
+            tgc.TagGroupId = tagGroupId;
+            this.ExpensesContext.TagGroupCategory.Add(tgc);
+            this.ExpensesContext.SaveChanges();
+            return true;
+        }
+
+        [HttpPost]
         [Route("SaveTags")]
         public IActionResult SaveTags(SaveTagsRequest saveTagsRequest)
         {
