@@ -97,7 +97,7 @@ pipeline {
                     while($true) {
                         if ( (Remove-Item "C:\\Bin\\IIS\\PTExpenses" -Recurse *>&1) -ne $null)
                         {  
-                            write-output "removing failed we should wait"
+                            write-output "Removing failed we should wait"
                         }
                         else 
                         {
@@ -109,7 +109,6 @@ pipeline {
 
             }
         }
-
 
         stage('Copy web page to the IIS Bin directory') {
             steps {         
@@ -139,10 +138,10 @@ pipeline {
                  bat('sqlcmd -S ".\\SQL2022" -q "USE PTExpenses;  ALTER ROLE [db_owner] ADD MEMBER [IIS APPPOOL\\PTExpenses];"')
              }
         }
-        stage('byebye') {
+        stage('Bye bye') {
             steps {
                 // Get some code from a GitHub repository
-                echo 'byebye1'
+                echo 'Bye bye'
             }
         }
     }
