@@ -36,15 +36,17 @@ namespace ProductivityTools.Expenses.Api.Controllers
         {
             if (saveBagRequest.Bag.BagId.HasValue)
             {
-                //saveBagRequest.Categories.ForEach(x =>
-                //{
-                //    saveBagRequest.Bag.BagCategories.Add(new BagCategory()
-                //    {
-                //        BagId = saveBagRequest.Bag.BagId.Value,
-                //        CategoryId = x.CategoryId,
-                //        BagCategoryId = x.BagCategoryId
-                //    }) ;
-                //});
+                
+                saveBagRequest.Categories.ForEach(x =>
+                {
+                    if (x.BagId==null)
+                    {
+                        var category = ExpensesContext.Categories.Where(y => y.CategoryId == x.CategoryId).Single();
+                        category.BagId = saveBagRequest.Bag.BagId;
+                        ExpensesContext.Update(category);
+                        Console.Write("fdsa");
+                    }
+                });
 
 
                 ExpensesContext.Update(saveBagRequest.Bag);
