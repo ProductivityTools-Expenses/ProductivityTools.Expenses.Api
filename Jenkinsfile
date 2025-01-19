@@ -4,36 +4,42 @@ pipeline {
     agent any
 
     stages {
-        stage('hello') {
+        stage('Hello') {
             steps {
                 // Get some code from a GitHub repository
                 echo 'hello'
             }
         }
-        stage('deleteWorkspace') {
+
+        stage('Print workpalce Path'){
+			steps{
+				echo "${env.WORKSPACE}"
+			}
+		}
+        stage('Delete Workspace') {
             steps {
                 deleteDir()
             }
         }
-        stage('clone') {
+        stage('Git Clone') {
             steps {
                 // Get some code from a GitHub repository
                 git branch: 'main',
-                url: 'https://github.com/ProductivityTools-Expenses/ProductivityTools.Expenses.Api.git'
+                url: 'https://github.com/ProductivityTools-Expenses/ProductivityTools.Expenses.Api'
             }
         }
-		stage('deleteDbMigratorDir') {
-            steps {
-                bat('if exist "C:\\Bin\\DbMigration\\Expenses.Api" RMDIR /Q/S "C:\\Bin\\DbMigration\\Expenses.Api"')
-            }
-        }
-        stage('build') {
+        stage('Build solution') {
             steps {
                 bat(script: "dotnet publish ProductivityTools.Expenses.Api.sln -c Release", returnStdout: true)
             }
         }
+        stage('Delete databse migration directory') {
+            steps {
+                bat('if exist "C:\\Bin\\DbMigration\\PTExpenses.Api" RMDIR /Q/S "C:\\Bin\\DbMigration\\PTExpenses.Api"')
+            }
+        }
  
-        stage('copyDbMigratdorFiles') {
+        stage('Copy database migration files') {
             steps {           
                 bat('xcopy "ProductivityTools.Expenses.DbUp\\bin\\Release\\net6.0\\publish" "C:\\Bin\\DbMigration\\Expenses.Api\\" /O /X /E /H /K')
             }
