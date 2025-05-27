@@ -4,7 +4,7 @@ using System.Reflection;
 
 var connectionString =
     args.FirstOrDefault()
-    ?? "Server=.\\SQL2022; Database=PTExpenses;Integrated Security=True;TrustServerCertificate=True";
+    ?? "Server=.\\sql2022; Database=PTExpenses;Integrated Security=True;TrustServerCertificate=True";
 EnsureDatabase.For.SqlDatabase(connectionString);
 Console.WriteLine(connectionString);
 Console.WriteLine("pawel");
