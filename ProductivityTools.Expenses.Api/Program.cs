@@ -25,7 +25,7 @@ builder.Services.AddCors(options =>
     {
         builder.WithOrigins("http://localhost:3000",
             "https://localhost:3000",
-            "https://agreeable-ocean-0d0923a10.4.azurestaticapps.net")
+            "https://agreeable-ocean-0d0923a10.4.azurestaticapps.net", "https://ptservicestatus-309299231472.us-central1.run.app")
         .AllowAnyMethod()
         .AllowAnyHeader();
     });
