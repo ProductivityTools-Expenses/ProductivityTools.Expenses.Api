@@ -7,13 +7,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        options.Authority = "https://securetoken.google.com/ptexpensesprod";
+        options.Authority = "https://securetoken.google.com/ptprojectsweb";
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
-            ValidIssuer = "https://securetoken.google.com/ptexpensesprod",
+            ValidIssuer = "https://securetoken.google.com/ptprojectsweb",
             ValidateAudience = true,
-            ValidAudience = "ptexpensesprod",
+            ValidAudience = "ptprojectsweb",
             ValidateLifetime = true
         };
     });
@@ -26,7 +26,7 @@ builder.Services.AddCors(options =>
         builder.WithOrigins("http://localhost:3000",
             "https://localhost:3000",
             "https://agreeable-ocean-0d0923a10.4.azurestaticapps.net", "https://ptservicestatus-309299231472.us-central1.run.app",
-            "https://expenses.productivitytools.top")
+            "https://expenses.productivitytools.top", "https://pt-expenses-page.web.app", "https://pt-expenses.web.app")
         .AllowAnyMethod()
         .AllowAnyHeader();
     });
