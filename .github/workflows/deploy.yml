@@ -70,7 +70,7 @@ jobs:
 
     - name: Stop IIS Website
       shell: cmd
-      run: %windir%\system32\inetsrv\appcmd stop site /site.name:PTExpenses
+      run: '%windir%\system32\inetsrv\appcmd stop site /site.name:PTExpenses'
 
     - name: Delete old IIS directory
       shell: powershell
@@ -96,7 +96,7 @@ jobs:
 
     - name: Start IIS Website
       shell: cmd
-      run: %windir%\system32\inetsrv\appcmd start site /site.name:PTExpenses
+      run: '%windir%\system32\inetsrv\appcmd start site /site.name:PTExpenses'
 
     - name: Create SQL Login
       shell: cmd
