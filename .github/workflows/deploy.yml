@@ -1,0 +1,131 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    # Note: This workflow deploys to IIS and SQL Server. 
+    # It must run on a self-hosted runner installed on the target Windows deployment server.
+    runs-on: self-hosted
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '9.0' # Targeted net9.0 in Jenkinsfile
+
+    - name: Build and Publish Solution
+      shell: cmd
+      run: dotnet publish ProductivityTools.Expenses.Api.sln -c Release
+
+    - name: Delete old database migration directory
+      shell: powershell
+      run: |
+        if (Test-Path "C:\Bin\DbMigration\PTExpenses.Api") {
+            Remove-Item "C:\Bin\DbMigration\PTExpenses.Api" -Recurse -Force
+        }
+
+    - name: Copy database migration files
+      shell: powershell
+      run: |
+        New-Item -ItemType Directory -Force -Path "C:\Bin\DbMigration\PTExpenses.Api"
+        Copy-Item -Path "ProductivityTools.Expenses.DbUp\bin\Release\net9.0\publish\*" -Destination "C:\Bin\DbMigration\PTExpenses.Api\" -Recurse -Force
+
+    - name: Run database migrations
+      shell: cmd
+      run: C:\Bin\DbMigration\PTExpenses.Api\ProductivityTools.Expenses.DbUp.exe
+
+    - name: Ensure IIS Site and AppPool Exist
+      shell: powershell
+      run: |
+        function CheckIfExist($Name){
+            cd $env:SystemRoot\system32\inetsrv
+            $exists = (.\appcmd.exe list sites /name:$Name) -ne $null
+            Write-Host "Site exists: $exists"
+            return $exists
+        }
+        
+        function Create($Name, $HttpBinding, $PhysicalPath){
+            $exists = CheckIfExist $Name
+            if ($exists){
+                Write-Host "Web page already existing"
+            }
+            else {
+                Write-Host "Creating app pool"
+                .\appcmd.exe add apppool /name:$Name /managedRuntimeVersion:"v4.0" /managedPipelineMode:"Integrated"
+                Write-Host "Creating webpage"
+                .\appcmd.exe add site /name:$Name /bindings:http://$HttpBinding /physicalpath:$PhysicalPath
+                Write-Host "Assign app pool to the website"
+                .\appcmd.exe set app "$Name/" /applicationPool:"$Name"
+            }
+        }
+        Create "PTExpenses" "*:8007" "C:\Bin\IIS\PTExpenses"
+
+    - name: Stop IIS Website
+      shell: cmd
+      run: %windir%\system32\inetsrv\appcmd stop site /site.name:PTExpenses
+
+    - name: Delete old IIS directory
+      shell: powershell
+      run: |
+        if (Test-Path "C:\Bin\IIS\PTExpenses") {
+            while($true) {
+                try {
+                    Remove-Item "C:\Bin\IIS\PTExpenses" -Recurse -Force -ErrorAction Stop
+                    break
+                }
+                catch {
+                    Write-Output "Removing failed, waiting to retry..."
+                    Start-Sleep -Seconds 1
+                }
+            }
+        }
+
+    - name: Copy web page to IIS Bin directory
+      shell: powershell
+      run: |
+        New-Item -ItemType Directory -Force -Path "C:\Bin\IIS\PTExpenses"
+        Copy-Item -Path "ProductivityTools.Expenses.Api\bin\Release\net9.0\publish\*" -Destination "C:\Bin\IIS\PTExpenses\" -Recurse -Force
+
+    - name: Start IIS Website
+      shell: cmd
+      run: %windir%\system32\inetsrv\appcmd start site /site.name:PTExpenses
+
+    - name: Create SQL Login
+      shell: cmd
+      run: sqlcmd -S ".\SQL2022" -q "IF NOT EXISTS (SELECT * FROM sys.server_principals WHERE name = 'IIS APPPOOL\PTExpenses') CREATE LOGIN [IIS APPPOOL\PTExpenses] FROM WINDOWS WITH DEFAULT_DATABASE=[PTExpenses];"
+
+    - name: Create SQL User
+      shell: cmd
+      run: sqlcmd -S ".\SQL2022" -q "USE PTExpenses; IF NOT EXISTS (SELECT * FROM sys.database_principals WHERE name = 'IIS APPPOOL\PTExpenses') CREATE USER [IIS APPPOOL\PTExpenses] FOR LOGIN [IIS APPPOOL\PTExpenses];"
+
+    - name: Grant db_owner to IIS AppPool
+      shell: cmd
+      run: sqlcmd -S ".\SQL2022" -q "USE PTExpenses; ALTER ROLE [db_owner] ADD MEMBER [IIS APPPOOL\PTExpenses];"
+
+    # Email notification requires setting up an SMTP action. 
+    # Below is a commented-out example using dawidd6/action-send-mail.
+    #
+    # - name: Send Status Email
+    #   if: always()
+    #   uses: dawidd6/action-send-mail@v3
+    #   with:
+    #     server_address: ${{ secrets.SMTP_SERVER }}
+    #     server_port: ${{ secrets.SMTP_PORT }}
+    #     username: ${{ secrets.SMTP_USERNAME }}
+    #     password: ${{ secrets.SMTP_PASSWORD }}
+    #     subject: "GitHub Actions Build ${{ job.status }}: ${{ github.repository }}"
+    #     to: ${{ secrets.NOTIFICATION_RECIPIENTS }}
+    #     from: "GitHub Actions <noreply@github.com>"
+    #     body: |
+    #       Job Status: ${{ job.status }}
+    #       Repository: ${{ github.repository }}
+    #       Commit: ${{ github.sha }}
+    #       View Run: https://github.com/ToBeDefined
