@@ -10,3 +10,5 @@ select * from me.Category where name like 'Setup'
 ```
 
 ![](Images/20240621193905.png)
+
+invoke github actions
