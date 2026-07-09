@@ -26,7 +26,9 @@ builder.Services.AddCors(options =>
         builder.WithOrigins("http://localhost:3000",
             "https://localhost:3000",
             "https://agreeable-ocean-0d0923a10.4.azurestaticapps.net", "https://ptservicestatus-309299231472.us-central1.run.app",
-            "https://expenses.productivitytools.top", "https://pt-expenses-page.web.app", "https://pt-expenses.web.app")
+            "https://expenses.productivitytools.top", "https://pt-expenses-page.web.app", "https://pt-expenses.web.app",
+             "https://pt-service-status-93484780890.us-central1.run.app",
+        "https://service-status.productivitytools.top")
         .AllowAnyMethod()
         .AllowAnyHeader();
     });
