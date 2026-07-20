@@ -67,6 +67,13 @@ jobs:
             }
         }
         Create "PTExpenses" "*:8007" "C:\Bin\IIS\PTExpenses"
+    
+    - name: Open Firewall Port 8007
+      shell: powershell
+      run: |
+        if (!(Get-NetFirewallRule -DisplayName "PTExpenses 8007" -ErrorAction SilentlyContinue)) {
+            New-NetFirewallRule -DisplayName "PTExpenses 8007" -Direction Inbound -LocalPort 8007 -Protocol TCP -Action Allow
+        }
 
     - name: Stop IIS Website
       shell: cmd
