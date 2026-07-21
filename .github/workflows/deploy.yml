@@ -79,6 +79,11 @@ jobs:
       shell: cmd
       run: '%windir%\system32\inetsrv\appcmd stop site /site.name:PTExpenses'
 
+    - name: Stop IIS App Pool
+      shell: cmd
+      run: "%windir%\\system32\\inetsrv\\appcmd stop apppool /apppool.name:PTExpenses"
+      continue-on-error: true
+
     - name: Delete old IIS directory
       shell: powershell
       run: |
