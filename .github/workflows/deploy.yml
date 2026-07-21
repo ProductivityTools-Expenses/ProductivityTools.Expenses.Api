@@ -106,9 +106,13 @@ jobs:
         New-Item -ItemType Directory -Force -Path "C:\Bin\IIS\PTExpenses"
         Copy-Item -Path "ProductivityTools.Expenses.Api\bin\Release\net9.0\publish\*" -Destination "C:\Bin\IIS\PTExpenses\" -Recurse -Force
 
-    - name: Start IIS Website
-      shell: cmd
-      run: '%windir%\system32\inetsrv\appcmd start site /site.name:PTExpenses'
+    - name: Start IIS App Pool
+        shell: cmd
+        run: "%windir%\\system32\\inetsrv\\appcmd start apppool /apppool.name:PTExpenses"
+
+    - name: Start IIS Site
+        shell: cmd
+        run: "%windir%\\system32\\inetsrv\\appcmd start site /site.name:PTExpenses"
 
     - name: Create SQL Login
       shell: cmd
